@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contáctanos — Agromedic Venezuela. Asesoría veterinaria, pedidos y soporte por WhatsApp, correo o formulario.">
+  <title>Contacto | AGROMEDIC</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+
+<!-- ── HEADER ─────────────────────────────────────────────── -->
+<header class="header" id="header">
+  <div class="contenedor header__inner">
+    <a href="index.html" class="header__logo">
+      <span class="header__logo-dot"></span>AGRO<span>MEDIC</span>
+    </a>
+    <nav class="nav" aria-label="Navegación principal">
+      <a href="index.html"   class="nav__link">Inicio</a>
+      <a href="tienda.html"  class="nav__link">Tienda</a>
+      <a href="mayoristas.html" class="nav__link">Mayoristas</a>
+      <a href="contacto.html"   class="nav__link">Contacto</a>
+      <a href="comparador.html"   class="nav__link">Comparador</a>
+      <a href="calculadora.html"   class="nav__link">Calculadora</a>
+    </nav>
+    <div class="header__acciones">
+      <a href="carrito.html" class="btn-carrito" aria-label="Ver carrito">
+        <i class="bi bi-basket3"></i>
+        <span class="contador-carrito" id="contador-carrito">0</span>
+      </a>
+      <button class="btn-menu" id="btn-menu" aria-label="Menú" aria-expanded="false">
+        <span class="btn-menu__line"></span>
+        <span class="btn-menu__line"></span>
+        <span class="btn-menu__line"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ── DRAWER MOBILE ──────────────────────────────────────── -->
+<div class="nav-drawer" id="nav-drawer" role="dialog" aria-modal="true">
+  <div class="nav-drawer__overlay"></div>
+  <div class="nav-drawer__panel">
+    <a href="index.html"      class="nav-drawer__link">Inicio</a>
+    <a href="tienda.html"     class="nav-drawer__link">Tienda</a>
+    <a href="mayoristas.html" class="nav-drawer__link">Mayoristas</a>
+    <a href="contacto.html"   class="nav-drawer__link activo">Contacto</a>
+    <a href="comparador.html"   class="nav-drawer__link">Comparador</a>
+    <a href="calculadora.html"   class="nav-drawer__link">Calculadora</a>
+    <div class="nav-drawer__footer">© 2025 Agromedic C.A.</div>
+  </div>
+</div>
+
+<main>
+
+  <!-- ── HERO ───────────────────────────────────────────────── -->
+  <section class="ctc-hero">
+    <div class="ctc-hero__glow" aria-hidden="true"></div>
+    <div class="contenedor ctc-hero__inner">
+      <span class="section__tag">
+        <i class="bi bi-chat-dots"></i> Atención al Cliente
+      </span>
+      <h1 class="ctc-hero__titulo">
+        ¿En qué podemos<br><em class="text-lime">ayudarte?</em>
+      </h1>
+      <p class="ctc-hero__desc">
+        Resolvemos tus dudas sobre productos, pedidos y envíos. Respuesta garantizada en menos de 24 horas hábiles.
+      </p>
+      <!-- Indicadores de respuesta rápida -->
+      <div class="ctc-hero__chips">
+        <div class="ctc-chip">
+          <i class="bi bi-whatsapp"></i>
+          <span>WhatsApp en minutos</span>
+        </div>
+        <div class="ctc-chip">
+          <i class="bi bi-clock"></i>
+          <span>Lun–Vie 8am–6pm</span>
+        </div>
+        <div class="ctc-chip">
+          <i class="bi bi-shield-check"></i>
+          <span>Asesoría técnica gratis</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TARJETAS DE CONTACTO RÁPIDO ───────────────────────── -->
+  <section class="ctc-cards-section">
+    <div class="contenedor">
+      <div class="ctc-cards-grid">
+
+        <!-- WhatsApp -->
+        <a href="https://wa.me/584226396237?text=Hola%2C%20necesito%20informaci%C3%B3n%20sobre%20sus%20productos"
+           class="ctc-card ctc-card--ws" target="_blank" rel="noopener">
+          <div class="ctc-card__icon"><i class="bi bi-whatsapp"></i></div>
+          <div class="ctc-card__body">
+            <h3 class="ctc-card__titulo">WhatsApp</h3>
+            <p class="ctc-card__valor">+58 422 639 6237</p>
+            <p class="ctc-card__nota">Respuesta inmediata en horario laboral</p>
+          </div>
+          <i class="bi bi-arrow-up-right ctc-card__arrow"></i>
+        </a>
+
+        <!-- Email -->
+        <a href="mailto:info@agromedic.com" class="ctc-card ctc-card--email">
+          <div class="ctc-card__icon"><i class="bi bi-envelope-fill"></i></div>
+          <div class="ctc-card__body">
+            <h3 class="ctc-card__titulo">Correo Electrónico</h3>
+            <p class="ctc-card__valor">info@agromedic.com</p>
+            <p class="ctc-card__nota">Respuesta en menos de 24h hábiles</p>
+          </div>
+          <i class="bi bi-arrow-up-right ctc-card__arrow"></i>
+        </a>
+
+        <!-- Ubicación -->
+        <div class="ctc-card ctc-card--location">
+          <div class="ctc-card__icon"><i class="bi bi-geo-alt-fill"></i></div>
+          <div class="ctc-card__body">
+            <h3 class="ctc-card__titulo">Ubicación</h3>
+            <p class="ctc-card__valor">Valencia, Carabobo</p>
+            <p class="ctc-card__nota">Venezuela · Despachos nacionales</p>
+          </div>
+          <i class="bi bi-map ctc-card__arrow"></i>
+        </div>
+
+        <!-- Horario -->
+        <div class="ctc-card ctc-card--hours">
+          <div class="ctc-card__icon"><i class="bi bi-clock-fill"></i></div>
+          <div class="ctc-card__body">
+            <h3 class="ctc-card__titulo">Horario de Atención</h3>
+            <p class="ctc-card__valor">Lun–Vie: 8:00am–6:00pm</p>
+            <p class="ctc-card__nota">Sáb: 9:00am–1:00pm · Dom: Cerrado</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── LAYOUT PRINCIPAL: FORM + SIDEBAR ───────────────────── -->
+  <section class="ctc-main-section">
+    <div class="contenedor">
+      <div class="ctc-layout">
+
+        <!-- ══ FORMULARIO ══ -->
+        <div class="ctc-form-col">
+          <div class="ctc-form-wrap">
+            <div class="ctc-form-header">
+              <h2 class="ctc-form-titulo">Envíanos un mensaje</h2>
+              <p class="ctc-form-desc">
+                ¿Tienes dudas sobre un producto, quieres saber si hay disponibilidad o necesitas asesoría técnica? Completa el formulario y te contactamos.
+              </p>
+            </div>
+
+            <!-- Selector de motivo del contacto -->
+            <div class="ctc-motivo-wrap">
+              <p class="campo-label" style="margin-bottom:.6rem">Motivo del contacto</p>
+              <div class="ctc-motivo-grid" id="ctc-motivo-grid">
+                <button type="button" class="ctc-motivo-btn activo" data-motivo="pedido">
+                  <i class="bi bi-basket3"></i> Hacer un pedido
+                </button>
+                <button type="button" class="ctc-motivo-btn" data-motivo="asesoria">
+                  <i class="bi bi-chat-text"></i> Asesoría técnica
+                </button>
+                <button type="button" class="ctc-motivo-btn" data-motivo="envio">
+                  <i class="bi bi-truck"></i> Consulta de envío
+                </button>
+                <button type="button" class="ctc-motivo-btn" data-motivo="otro">
+                  <i class="bi bi-three-dots"></i> Otro
+                </button>
+              </div>
+              <input type="hidden" id="motivo-hidden" value="pedido">
+            </div>
+
+            <form class="ctc-form" id="formulario-contacto" novalidate>
+
+              <!-- Datos personales -->
+              <div class="ctc-form-grupo">
+                <h4 class="ctc-form-grupo__titulo">
+                  <i class="bi bi-person"></i> Datos de contacto
+                </h4>
+                <div class="form-fila">
+                  <div class="campo-wrap">
+                    <label class="campo-label" for="ctc-nombre">Nombre completo *</label>
+                    <input class="campo-input" id="ctc-nombre" name="nombre"
+                           type="text" placeholder="Ej: María González"
+                           required autocomplete="name">
+                  </div>
+                  <div class="campo-wrap">
+                    <label class="campo-label" for="ctc-telefono">WhatsApp *</label>
+                    <input class="campo-input" id="ctc-telefono" name="telefono"
+                           type="tel" placeholder="Ej: 0412 555 1234"
+                           required autocomplete="tel">
+                  </div>
+                </div>
+                <div class="campo-wrap">
+                  <label class="campo-label" for="ctc-email">Correo electrónico <span class="ctc-opcional">(opcional)</span></label>
+                  <input class="campo-input" id="ctc-email" name="email"
+                         type="email" placeholder="tu@correo.com"
+                         autocomplete="email">
+                </div>
+              </div>
+
+              <!-- Ubicación -->
+              <div class="ctc-form-grupo">
+                <h4 class="ctc-form-grupo__titulo">
+                  <i class="bi bi-geo-alt"></i> Ubicación
+                </h4>
+                <div class="form-fila">
+                  <div class="campo-wrap">
+                    <label class="campo-label" for="ctc-select-estado">Estado *</label>
+                    <select class="campo-select" id="ctc-select-estado" name="estado" required>
+                      <option value="">Selecciona tu Estado</option>
+                    </select>
+                  </div>
+                  <div class="campo-wrap">
+                    <label class="campo-label" for="ctc-select-ciudad">Ciudad *</label>
+                    <select class="campo-select" id="ctc-select-ciudad" name="ciudad" required>
+                      <option value="">Selecciona tu Ciudad</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Campos condicionales: Pedido con carrito -->
+              <div class="ctc-form-grupo ctc-grupo-pedido" id="ctc-grupo-pedido">
+                <h4 class="ctc-form-grupo__titulo">
+                  <i class="bi bi-basket3"></i> Tu pedido actual
+                </h4>
+                <!-- Resumen del carrito (inyectado por JS) -->
+                <div class="ctc-resumen-carrito" id="ctc-resumen-carrito">
+                  <div class="ctc-resumen-vacio" id="ctc-resumen-vacio">
+                    <i class="bi bi-basket"></i>
+                    <p>Tu carrito está vacío.</p>
+                    <a href="tienda.html" class="btn btn-secondary btn-sm">
+                      <i class="bi bi-shop"></i> Ver productos
+                    </a>
+                  </div>
+                  <div id="ctc-resumen-items" style="display:none">
+                    <div id="ctc-items-lista"></div>
+                    <div class="ctc-resumen-total">
+                      <span>Total estimado:</span>
+                      <strong id="ctc-total-valor">$0.00</strong>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Campos condicionales: Ganadero/Empresa -->
+              <div class="ctc-form-grupo ctc-grupo-empresa" id="ctc-grupo-empresa" style="display:none">
+                <h4 class="ctc-form-grupo__titulo">
+                  <i class="bi bi-building"></i> Datos de la empresa
+                </h4>
+                <div class="form-fila">
+                  <div class="campo-wrap">
+                    <label class="campo-label" for="ctc-empresa">Granja / Empresa</label>
+                    <input class="campo-input" id="ctc-empresa" name="empresa"
+                           type="text" placeholder="Nombre de la granja o empresa">
+                  </div>
+                  <div class="campo-wrap">
+                    <label class="campo-label" for="ctc-tipo-ganado">Tipo de explotación</label>
+                    <select class="campo-select" id="ctc-tipo-ganado" name="tipo_ganado">
+                      <option value="">Selecciona</option>
+                      <option value="bovino">Bovino</option>
+                      <option value="avicola">Avícola</option>
+                      <option value="porcino">Porcino</option>
+                      <option value="equino">Equino</option>
+                      <option value="ovino">Ovino / Caprino</option>
+                      <option value="otro">Otro</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Toggle factura fiscal -->
+                <label class="ctc-toggle-factura">
+                  <input type="checkbox" id="ctc-factura" name="factura_fiscal" value="si">
+                  <div class="toggle-track"></div>
+                  <span class="toggle-label">Necesito Factura Fiscal con RIF</span>
+                </label>
+                <div class="campo-condicional" id="ctc-campo-rif">
+                  <div class="campo-wrap">
+                    <label class="campo-label" for="ctc-rif">RIF / Cédula Jurídica</label>
+                    <input class="campo-input" id="ctc-rif" name="rif"
+                           type="text" placeholder="J-12345678-9" disabled>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Mensaje -->
+              <div class="ctc-form-grupo">
+                <h4 class="ctc-form-grupo__titulo">
+                  <i class="bi bi-chat-left-text"></i> Tu mensaje
+                </h4>
+                <div class="campo-wrap">
+                  <label class="campo-label" for="ctc-mensaje">¿En qué podemos ayudarte? *</label>
+                  <textarea class="campo-textarea" id="ctc-mensaje" name="mensaje"
+                            rows="4" required
+                            placeholder="Describe tu consulta, el producto que buscas, cantidades o cualquier otra información relevante…"></textarea>
+                  <p class="ctc-char-count" id="ctc-char-count">0 / 600</p>
+                </div>
+              </div>
+
+              <!-- Botón de envío -->
+              <button type="submit" class="btn btn-primary btn-full btn-xl" id="btn-ctc-enviar">
+                <i class="bi bi-whatsapp"></i>
+                <span>Enviar por WhatsApp</span>
+              </button>
+
+              <p class="ctc-privacidad">
+                <i class="bi bi-shield-lock"></i>
+                Tu información es confidencial y solo se usará para responder tu consulta.
+                No spam, nunca.
+              </p>
+
+            </form>
+
+            <!-- Estado de confirmación (oculto hasta envío) -->
+            <div class="ctc-confirmacion" id="ctc-confirmacion" style="display:none">
+              <div class="confirmacion-icon"><i class="bi bi-check-lg"></i></div>
+              <h3>¡Mensaje enviado!</h3>
+              <p>Tu consulta fue enviada por WhatsApp. Nuestro equipo te responderá a la brevedad.</p>
+              <div style="display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center;margin-top:1.5rem">
+                <a href="tienda.html" class="btn btn-primary">
+                  <i class="bi bi-shop"></i> Ver productos
+                </a>
+                <button class="btn btn-secondary" id="btn-nuevo-mensaje">
+                  <i class="bi bi-arrow-counterclockwise"></i> Nuevo mensaje
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div><!-- /form col -->
+
+        <!-- ══ SIDEBAR ══ -->
+        <aside class="ctc-sidebar">
+
+          <!-- Contacto directo -->
+          <div class="ctc-sidebar-card">
+            <h4 class="ctc-sidebar-titulo">
+              <i class="bi bi-lightning-charge-fill"></i> Contacto directo
+            </h4>
+            <div class="ctc-sidebar-lista">
+              <a href="https://wa.me/584226396237" target="_blank" class="ctc-sidebar-item">
+                <div class="ctc-sidebar-item__icon ctc-sidebar-item__icon--ws">
+                  <i class="bi bi-whatsapp"></i>
+                </div>
+                <div>
+                  <p class="ctc-sidebar-item__label">WhatsApp Principal</p>
+                  <p class="ctc-sidebar-item__val">+58 422 639 6237</p>
+                </div>
+                <i class="bi bi-chevron-right ctc-sidebar-item__chevron"></i>
+              </a>
+              <a href="mailto:info@agromedic.com" class="ctc-sidebar-item">
+                <div class="ctc-sidebar-item__icon">
+                  <i class="bi bi-envelope"></i>
+                </div>
+                <div>
+                  <p class="ctc-sidebar-item__label">Correo General</p>
+                  <p class="ctc-sidebar-item__val">info@agromedic.com</p>
+                </div>
+                <i class="bi bi-chevron-right ctc-sidebar-item__chevron"></i>
+              </a>
+              <a href="mailto:mayoristas@agromedic.com" class="ctc-sidebar-item">
+                <div class="ctc-sidebar-item__icon">
+                  <i class="bi bi-building"></i>
+                </div>
+                <div>
+                  <p class="ctc-sidebar-item__label">Canal Mayorista</p>
+                  <p class="ctc-sidebar-item__val">mayoristas@agromedic.com</p>
+                </div>
+                <i class="bi bi-chevron-right ctc-sidebar-item__chevron"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Horarios -->
+          <div class="ctc-sidebar-card">
+            <h4 class="ctc-sidebar-titulo">
+              <i class="bi bi-clock-fill"></i> Horarios de atención
+            </h4>
+            <table class="ctc-horarios-table">
+              <tbody>
+                <tr>
+                  <td>Lunes – Viernes</td>
+                  <td class="ctc-hora">8:00 am – 6:00 pm</td>
+                </tr>
+                <tr>
+                  <td>Sábado</td>
+                  <td class="ctc-hora">9:00 am – 1:00 pm</td>
+                </tr>
+                <tr>
+                  <td>Domingo</td>
+                  <td class="ctc-hora ctc-cerrado">Cerrado</td>
+                </tr>
+              </tbody>
+            </table>
+            <p class="ctc-horarios-nota">
+              <i class="bi bi-info-circle"></i>
+              Consultas por WhatsApp pueden recibir respuesta fuera de horario.
+            </p>
+          </div>
+
+          <!-- Redes sociales -->
+          <div class="ctc-sidebar-card">
+            <h4 class="ctc-sidebar-titulo">
+              <i class="bi bi-share-fill"></i> Síguenos
+            </h4>
+            <div class="ctc-rrss">
+              <a href="#" class="ctc-rrss-btn" aria-label="Instagram">
+                <i class="bi bi-instagram"></i>
+                <span>@agromedic_ve</span>
+              </a>
+              <a href="#" class="ctc-rrss-btn" aria-label="Facebook">
+                <i class="bi bi-facebook"></i>
+                <span>Agromedic Venezuela</span>
+              </a>
+              <a href="https://wa.me/584226396237" class="ctc-rrss-btn ctc-rrss-btn--ws" aria-label="WhatsApp" target="_blank">
+                <i class="bi bi-whatsapp"></i>
+                <span>Canal de WhatsApp</span>
+              </a>
+            </div>
+          </div>
+
+        </aside>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FAQ ACCORDION ──────────────────────────────────────── -->
+  <section class="ctc-faq-section">
+    <div class="contenedor">
+      <div class="section__header text-center" style="margin-bottom:2.5rem">
+        <span class="section__tag"><i class="bi bi-question-circle"></i> Preguntas Frecuentes</span>
+        <h2 style="margin-top:.5rem">Dudas <em class="text-lime">comunes</em></h2>
+      </div>
+
+      <div class="ctc-faq-grid">
+
+        <div class="ctc-faq-item" id="faq-1">
+          <button class="ctc-faq-btn" aria-expanded="false" aria-controls="faq-panel-1">
+            <span>¿Hacen envíos a todo Venezuela?</span>
+            <i class="bi bi-plus ctc-faq-icon"></i>
+          </button>
+          <div class="ctc-faq-panel" id="faq-panel-1" role="region">
+            <p>Sí, despachamos a los 23 estados del país a través de MRW, Zoom y Tealca. El costo del flete se calcula según el peso del pedido y tu ubicación, y te lo confirmamos antes de procesar el despacho.</p>
+          </div>
+        </div>
+
+        <div class="ctc-faq-item" id="faq-2">
+          <button class="ctc-faq-btn" aria-expanded="false" aria-controls="faq-panel-2">
+            <span>¿Qué métodos de pago aceptan?</span>
+            <i class="bi bi-plus ctc-faq-icon"></i>
+          </button>
+          <div class="ctc-faq-panel" id="faq-panel-2" role="region">
+            <p>Aceptamos Pago Móvil, Transferencia Bancaria Nacional, Zelle (USD), Binance Pay (USDT) y Efectivo en divisas (USD / BsD). El detalle de las cuentas se comparte al confirmar el pedido por WhatsApp.</p>
+          </div>
+        </div>
+
+        <div class="ctc-faq-item" id="faq-3">
+          <button class="ctc-faq-btn" aria-expanded="false" aria-controls="faq-panel-3">
+            <span>¿Cuánto tarda en llegar mi pedido?</span>
+            <i class="bi bi-plus ctc-faq-icon"></i>
+          </button>
+          <div class="ctc-faq-panel" id="faq-panel-3" role="region">
+            <p>El tiempo estimado es de 2 a 5 días hábiles según tu estado. Para Valencia y Caracas, el tiempo puede reducirse a 24–48 horas. Una vez despachado recibirás el número de guía de seguimiento.</p>
+          </div>
+        </div>
+
+        <div class="ctc-faq-item" id="faq-4">
+          <button class="ctc-faq-btn" aria-expanded="false" aria-controls="faq-panel-4">
+            <span>¿Puedo solicitar una factura fiscal?</span>
+            <i class="bi bi-plus ctc-faq-icon"></i>
+          </button>
+          <div class="ctc-faq-panel" id="faq-panel-4" role="region">
+            <p>Sí, emitimos facturas fiscales a nombre de personas jurídicas con RIF activo. Indícalo en el formulario o mencionalo al coordinar tu pedido por WhatsApp y proporciona el RIF de tu empresa.</p>
+          </div>
+        </div>
+
+        <div class="ctc-faq-item" id="faq-5">
+          <button class="ctc-faq-btn" aria-expanded="false" aria-controls="faq-panel-5">
+            <span>¿Tienen precios especiales para ganaderos o distribuidores?</span>
+            <i class="bi bi-plus ctc-faq-icon"></i>
+          </button>
+          <div class="ctc-faq-panel" id="faq-panel-5" role="region">
+            <p>Sí, contamos con un canal mayorista con precios diferenciados por volumen. Puedes solicitar tu cotización en nuestra <a href="mayoristas.html" style="color:var(--c-lime)">página de mayoristas</a> o contactarnos directamente por WhatsApp.</p>
+          </div>
+        </div>
+
+        <div class="ctc-faq-item" id="faq-6">
+          <button class="ctc-faq-btn" aria-expanded="false" aria-controls="faq-panel-6">
+            <span>¿Los productos tienen registro sanitario?</span>
+            <i class="bi bi-plus ctc-faq-icon"></i>
+          </button>
+          <div class="ctc-faq-panel" id="faq-panel-6" role="region">
+            <p>Todos nuestros productos cuentan con registro sanitario ante el INSAI (Instituto Nacional de Salud Agrícola Integral) y el SASA (Servicio Autónomo de Sanidad Agropecuaria), garantizando su calidad y legalidad.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ── FOOTER ─────────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="contenedor footer__grid">
+    <div>
+      <div class="footer__logo">AGRO<span style="color:var(--c-cream)">MEDIC</span></div>
+      <p class="footer__desc">Salud animal con ciencia y naturaleza.</p>
+      <div class="footer__social">
+        <a href="#" class="footer__social-link" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+        <a href="#" class="footer__social-link" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+        <a href="https://wa.me/584226396237" class="footer__social-link" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+      </div>
+    </div>
+    <div>
+      <h4 class="footer__col-title">Navegación</h4>
+      <ul class="footer__links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="tienda.html">Tienda</a></li>
+        <li><a href="mayoristas.html">Mayoristas</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="footer__col-title">Legal</h4>
+      <ul class="footer__links">
+        <li><a href="#">Privacidad</a></li>
+        <li><a href="#">Términos</a></li>
+        <li><a href="#">Envíos</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="footer__col-title">Contacto</h4>
+      <p class="footer__contact-item"><i class="bi bi-whatsapp"></i> +58 422 639 6237</p>
+      <p class="footer__contact-item"><i class="bi bi-envelope"></i> info@agromedic.com</p>
+      <p class="footer__contact-item"><i class="bi bi-geo-alt"></i> Valencia, Venezuela</p>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <p class="footer__copy">© 2025 Agromedic C.A. Todos los derechos reservados.</p>
+    <span class="footer__badge"><i class="bi bi-circle-fill" style="font-size:.4rem"></i> Conectado a Kont SaaS</span>
+  </div>
+</footer>
+
+<!-- ── TOAST ───────────────────────────────────────────────── -->
+<div class="toast" id="toast-global" role="alert" aria-live="polite">
+  <i class="bi bi-check-circle-fill toast__icon" id="toast-icono"></i>
+  <span class="toast__texto" id="toast-texto"></span>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/contacto.js"></script>
+</body>
+</html>

@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrito y Checkout | AGROMEDIC</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <style>
+    .page-titulo {
+      padding-block: 3rem 2rem;
+      border-bottom: 1px solid var(--c-border);
+      background: var(--c-bg-2);
+    }
+
+    .checkout-section {
+      padding-block: var(--sp-6);
+    }
+
+    /* Sección de consulta de pedido */
+    .consulta-pedido {
+      background: var(--c-surface);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-4);
+      margin-top: var(--sp-6);
+    }
+
+    .consulta-pedido__titulo {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--c-cream);
+      margin-bottom: var(--sp-2);
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+
+    .consulta-pedido__titulo i { color: var(--c-lime); }
+
+    .consulta-form {
+      display: flex;
+      gap: var(--sp-2);
+      flex-wrap: wrap;
+    }
+
+    .consulta-form .campo-input { flex: 1; min-width: 0; }
+
+    #resultado-consulta { margin-top: var(--sp-2); }
+
+    /* Separador de secciones */
+    .checkout-divider {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+      margin-block: var(--sp-4);
+    }
+
+    .checkout-divider::before,
+    .checkout-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--c-border);
+    }
+
+    .checkout-divider span {
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--c-text-faint);
+      white-space: nowrap;
+    }
+
+    /* Pasos del proceso */
+    .proceso-wrap {
+      overflow-x: auto;
+      padding-bottom: .5rem;
+      margin-bottom: var(--sp-4);
+    }
+
+    /* Confirmación */
+    #confirmacion-pedido {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HEADER ─────────────────────────────────────────────── -->
+<header class="header scrolled" id="header">
+  <div class="contenedor header__inner">
+    <a href="index.html" class="header__logo">
+      <span class="header__logo-dot"></span>AGRO<span>MEDIC</span>
+    </a>
+
+    <nav class="nav" aria-label="Navegación principal">
+      <a href="index.html"   class="nav__link">Inicio</a>
+      <a href="tienda.html"  class="nav__link">Tienda</a>
+      <a href="mayoristas.html" class="nav__link">Mayoristas</a>
+      <a href="contacto.html"   class="nav__link">Contacto</a>
+      <a href="comparador.html"   class="nav__link">Comparador</a>
+      <a href="calculadora.html"   class="nav__link">Calculadora</a>
+    </nav>
+
+    <div class="header__acciones">
+      <a href="carrito.html" class="btn-carrito" aria-label="Ver carrito">
+        <i class="bi bi-basket3"></i>
+        <span class="contador-carrito" id="contador-carrito">0</span>
+      </a>
+      <button class="btn-menu" id="btn-menu" aria-label="Menú" aria-expanded="false">
+        <span class="btn-menu__line"></span>
+        <span class="btn-menu__line"></span>
+        <span class="btn-menu__line"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ── DRAWER MOBILE ──────────────────────────────────────── -->
+<div class="nav-drawer" id="nav-drawer" role="dialog" aria-modal="true">
+  <div class="nav-drawer__overlay"></div>
+  <div class="nav-drawer__panel">
+    <a href="index.html"   class="nav-drawer__link">Inicio</a>
+    <a href="tienda.html"  class="nav-drawer__link">Tienda</a>
+    <a href="mayoristas.html" class="nav-drawer__link">Mayoristas</a>
+    <a href="contacto.html"   class="nav-drawer__link">Contacto</a>
+    <a href="comparador.html"   class="nav-drawer__link">Comparador</a>
+    <a href="calculadora.html"   class="nav-drawer__link">Calculadora</a>
+    <div class="nav-drawer__footer">© 2025 Agromedic C.A.</div>
+  </div>
+</div>
+
+<main>
+
+  <!-- ── TÍTULO PÁGINA ──────────────────────────────────────── -->
+  <div class="page-titulo">
+    <div class="contenedor">
+      <span class="section__tag"><i class="bi bi-basket3"></i> Checkout</span>
+      <h1 style="margin-top:.5rem">Tu <em class="text-lime">Pedido</em></h1>
+    </div>
+  </div>
+
+  <!-- ── PASOS ──────────────────────────────────────────────── -->
+  <div class="contenedor" style="padding-top:2rem">
+    <div class="proceso-wrap">
+      <div class="proceso-pasos">
+        <div class="proceso-paso completado">
+          <div class="proceso-paso__num"><i class="bi bi-check"></i></div>
+          <span class="proceso-paso__label">Carrito</span>
+        </div>
+        <div class="proceso-linea"></div>
+        <div class="proceso-paso activo">
+          <div class="proceso-paso__num">2</div>
+          <span class="proceso-paso__label">Datos y Pago</span>
+        </div>
+        <div class="proceso-linea"></div>
+        <div class="proceso-paso">
+          <div class="proceso-paso__num">3</div>
+          <span class="proceso-paso__label">Confirmación</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── LAYOUT PRINCIPAL ───────────────────────────────────── -->
+  <section class="checkout-section">
+    <div class="contenedor">
+
+      <!-- Confirmación (oculta hasta que se procesa el pedido) -->
+      <div id="confirmacion-pedido">
+        <div class="confirmacion-box">
+          <div class="confirmacion-icon"><i class="bi bi-check-lg"></i></div>
+          <h2 class="text-cream">¡Pedido enviado!</h2>
+          <p class="text-muted" style="max-width:440px">
+            Tu pedido ha sido registrado. Nos comunicaremos por WhatsApp para coordinar el envío y confirmar el pago.
+          </p>
+          <div class="confirmacion-id">
+            <i class="bi bi-hash"></i>
+            <span id="confirmacion-id-valor">AGR-XXXXXX</span>
+          </div>
+          <p class="text-xs text-muted" style="margin-top:.5rem">
+            Guarda este código para consultar el estado de tu pedido.
+          </p>
+          <div style="display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-top:1.5rem">
+            <a href="tienda.html" class="btn btn-secondary">
+              <i class="bi bi-shop"></i> Seguir comprando
+            </a>
+            <button class="btn btn-primary" onclick="document.getElementById('form-consultar-pedido').scrollIntoView({behavior:'smooth'})">
+              <i class="bi bi-search"></i> Consultar estado
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Layout carrito + form (oculto tras confirmación) -->
+      <div class="carrito-layout" id="carrito-layout">
+
+        <!-- ── COLUMNA IZQUIERDA: Lista + Formulario ── -->
+        <div>
+          <!-- Lista de productos -->
+          <h2 class="text-cream" style="font-size:1.1rem;margin-bottom:1rem">
+            <i class="bi bi-basket3" style="color:var(--c-lime)"></i> Productos en tu carrito
+          </h2>
+          <div class="carrito-lista" id="carrito-lista">
+            <!-- Renderizado por JS -->
+          </div>
+
+          <!-- Formulario checkout (oculto si carrito vacío) -->
+          <form class="checkout-form" id="checkout-form" style="display:none" novalidate>
+
+            <!-- DATOS PERSONALES -->
+            <div class="checkout-divider"><span>Datos de contacto</span></div>
+
+            <div class="form-grupo">
+              <div class="form-fila">
+                <div class="campo-wrap">
+                  <label class="campo-label" for="ch-nombre">Nombre completo *</label>
+                  <input class="campo-input" id="ch-nombre" name="nombre" type="text"
+                         placeholder="Ej: María González" required autocomplete="name">
+                </div>
+                <div class="campo-wrap">
+                  <label class="campo-label" for="ch-telefono">WhatsApp *</label>
+                  <input class="campo-input" id="ch-telefono" name="telefono" type="tel"
+                         placeholder="Ej: 0412 555 1234" required autocomplete="tel">
+                </div>
+              </div>
+              <div class="campo-wrap">
+                <label class="campo-label" for="ch-email">Correo electrónico (opcional)</label>
+                <input class="campo-input" id="ch-email" name="email" type="email"
+                       placeholder="tu@correo.com" autocomplete="email">
+              </div>
+            </div>
+
+            <!-- DATOS DE ENVÍO -->
+            <div class="checkout-divider"><span>Datos de envío</span></div>
+
+            <div class="form-grupo">
+              <div class="form-fila">
+                <div class="campo-wrap">
+                  <label class="campo-label" for="select-estado">Estado *</label>
+                  <select class="campo-select" id="select-estado" name="estado" required>
+                    <option value="">Selecciona tu Estado</option>
+                  </select>
+                </div>
+                <div class="campo-wrap">
+                  <label class="campo-label" for="select-ciudad">Ciudad *</label>
+                  <select class="campo-select" id="select-ciudad" name="ciudad" required>
+                    <option value="">Selecciona tu Ciudad</option>
+                  </select>
+                </div>
+              </div>
+              <div class="campo-wrap">
+                <label class="campo-label" for="ch-direccion">Dirección (opcional)</label>
+                <input class="campo-input" id="ch-direccion" name="direccion" type="text"
+                       placeholder="Urb., Calle, Número..." autocomplete="street-address">
+              </div>
+            </div>
+
+            <!-- MÉTODO DE PAGO -->
+            <div class="checkout-divider"><span>Método de pago</span></div>
+
+            <div class="form-grupo">
+              <p class="text-sm text-muted" style="margin-bottom:.75rem">Selecciona cómo realizarás tu pago:</p>
+
+              <div class="pago-metodos" role="group" aria-label="Métodos de pago">
+                <button type="button" class="pago-metodo-btn" data-metodo="pagomovil">
+                  <i class="bi bi-phone"></i>
+                  <span>Pago Móvil</span>
+                </button>
+                <button type="button" class="pago-metodo-btn" data-metodo="transferencia">
+                  <i class="bi bi-bank"></i>
+                  <span>Transferencia</span>
+                </button>
+                <button type="button" class="pago-metodo-btn" data-metodo="zelle">
+                  <i class="bi bi-currency-dollar"></i>
+                  <span>Zelle</span>
+                </button>
+                <button type="button" class="pago-metodo-btn" data-metodo="binance">
+                  <i class="bi bi-currency-bitcoin"></i>
+                  <span>Binance</span>
+                </button>
+                <button type="button" class="pago-metodo-btn" data-metodo="efectivo">
+                  <i class="bi bi-cash-stack"></i>
+                  <span>Efectivo</span>
+                </button>
+              </div>
+
+              <!-- ── CAMPOS PAGO MÓVIL ── -->
+              <div class="pago-campos" id="pago-campos-pagomovil">
+                <div class="pago-info-box">
+                  <i class="bi bi-info-circle"></i>
+                  <span>
+                    <strong>Datos para Pago Móvil:</strong><br>
+                    Banco: Banesco · Teléfono: <strong>0412-5551234</strong> · RIF: <strong>J-123456789</strong>
+                  </span>
+                </div>
+                <div class="form-fila">
+                  <div class="campo-wrap">
+                    <label class="campo-label">Tu Banco de Origen *</label>
+                    <select class="campo-select" id="select-banco-pagomovil" name="banco_origen">
+                      <option value="">Selecciona tu banco</option>
+                    </select>
+                  </div>
+                  <div class="campo-wrap">
+                    <label class="campo-label">Teléfono emisor *</label>
+                    <input class="campo-input" name="telefono_pago" type="tel" placeholder="04XX XXX XXXX">
+                  </div>
+                </div>
+                <div class="form-fila">
+                  <div class="campo-wrap">
+                    <label class="campo-label">Cédula / RIF *</label>
+                    <input class="campo-input" name="cedula_pago" type="text" placeholder="V-12345678">
+                  </div>
+                  <div class="campo-wrap">
+                    <label class="campo-label">Número de referencia *</label>
+                    <input class="campo-input" name="referencia_pagomovil" type="text" placeholder="Últimos 8 dígitos">
+                  </div>
+                </div>
+              </div>
+
+              <!-- ── CAMPOS TRANSFERENCIA ── -->
+              <div class="pago-campos" id="pago-campos-transferencia">
+                <div class="pago-info-box">
+                  <i class="bi bi-info-circle"></i>
+                  <span>
+                    <strong>Datos para Transferencia:</strong><br>
+                    Banco: Mercantil · Cuenta Corriente: <strong>0105-XXXX-XX</strong> · A nombre de: <strong>Agromedic C.A.</strong> · RIF: <strong>J-123456789</strong>
+                  </span>
+                </div>
+                <div class="form-fila">
+                  <div class="campo-wrap">
+                    <label class="campo-label">Tu Banco de Origen *</label>
+                    <select class="campo-select" id="select-banco-transferencia" name="banco_transferencia">
+                      <option value="">Selecciona tu banco</option>
+                    </select>
+                  </div>
+                  <div class="campo-wrap">
+                    <label class="campo-label">Número de referencia *</label>
+                    <input class="campo-input" name="referencia_transferencia" type="text" placeholder="Ej: 1234567890">
+                  </div>
+                </div>
+                <div class="campo-wrap">
+                  <label class="campo-label">Titular de la cuenta emisora *</label>
+                  <input class="campo-input" name="titular_transferencia" type="text" placeholder="Nombre completo">
+                </div>
+              </div>
+
+              <!-- ── CAMPOS ZELLE ── -->
+              <div class="pago-campos" id="pago-campos-zelle">
+                <div class="pago-info-box">
+                  <i class="bi bi-info-circle"></i>
+                  <span>
+                    <strong>Enviar Zelle a:</strong><br>
+                    Correo: <strong>pagos@agromedic.com</strong> · Titular: <strong>Carlos Pérez</strong>
+                  </span>
+                </div>
+                <div class="form-fila">
+                  <div class="campo-wrap">
+                    <label class="campo-label">Correo Zelle emisor *</label>
+                    <input class="campo-input" name="zelle_correo" type="email" placeholder="tu@email.com">
+                  </div>
+                  <div class="campo-wrap">
+                    <label class="campo-label">Titular de tu cuenta Zelle *</label>
+                    <input class="campo-input" name="zelle_titular" type="text" placeholder="Nombre completo">
+                  </div>
+                </div>
+                <div class="campo-wrap">
+                  <label class="campo-label">Número de confirmación Zelle *</label>
+                  <input class="campo-input" name="zelle_confirmacion" type="text" placeholder="Ej: Z-XXXXXXXXXX">
+                </div>
+              </div>
+
+              <!-- ── CAMPOS BINANCE ── -->
+              <div class="pago-campos" id="pago-campos-binance">
+                <div class="pago-info-box">
+                  <i class="bi bi-info-circle"></i>
+                  <span>
+                    <strong>Binance Pay (USDT):</strong><br>
+                    Pay ID: <strong>123456789</strong> · Agromedic C.A. · Acepta USDT en red BEP-20
+                  </span>
+                </div>
+                <div class="campo-wrap">
+                  <label class="campo-label">Tu Pay ID de Binance *</label>
+                  <input class="campo-input" name="binance_payid" type="text" placeholder="Ej: 987654321">
+                </div>
+                <div class="campo-wrap">
+                  <label class="campo-label">ID de transacción Binance *</label>
+                  <input class="campo-input" name="binance_txid" type="text" placeholder="Ej: ORD-XXXXXXXXXX">
+                </div>
+              </div>
+
+              <!-- ── EFECTIVO ── -->
+              <div class="pago-campos" id="pago-campos-efectivo">
+                <div class="pago-info-box">
+                  <i class="bi bi-info-circle"></i>
+                  <span>
+                    <strong>Pago en Efectivo:</strong><br>
+                    Acepta: USD · EUR · BsD (tasa BCV del día)<br>
+                    Disponible para retiro en tienda (Valencia) o pago contra entrega en algunos sectores.
+                  </span>
+                </div>
+                <div class="campo-wrap">
+                  <label class="campo-label">Tipo de divisas *</label>
+                  <select class="campo-select" name="efectivo_divisa">
+                    <option value="">Selecciona</option>
+                    <option value="USD">Dólares (USD)</option>
+                    <option value="EUR">Euros (EUR)</option>
+                    <option value="BsD">Bolívares (BsD)</option>
+                  </select>
+                </div>
+                <div class="campo-wrap">
+                  <label class="campo-label">Modalidad *</label>
+                  <select class="campo-select" name="efectivo_modalidad">
+                    <option value="">Selecciona</option>
+                    <option value="retiro_tienda">Retiro en tienda (Valencia)</option>
+                    <option value="contra_entrega">Pago contra entrega</option>
+                  </select>
+                </div>
+              </div>
+
+            </div><!-- /form-grupo pago -->
+
+            <!-- NOTAS ADICIONALES -->
+            <div class="form-grupo">
+              <div class="campo-wrap">
+                <label class="campo-label" for="ch-notas">Notas adicionales (opcional)</label>
+                <textarea class="campo-textarea" id="ch-notas" name="notas"
+                          placeholder="¿Alguna indicación especial para tu pedido?"></textarea>
+              </div>
+            </div>
+
+            <!-- BOTÓN SUBMIT -->
+            <button type="submit" class="btn btn-primary btn-full btn-xl" id="btn-checkout-submit">
+              <i class="bi bi-send-fill"></i> Confirmar Pedido
+            </button>
+
+            <p class="text-xs text-muted text-center" style="margin-top:.75rem">
+              <i class="bi bi-shield-lock" style="color:var(--c-lime)"></i>
+              Tu pedido se registrará en nuestro sistema Kont. Confirmaremos todo por WhatsApp.
+            </p>
+
+          </form><!-- /checkout-form -->
+        </div>
+
+        <!-- ── COLUMNA DERECHA: Resumen + Consulta ── -->
+        <div>
+          <!-- Panel resumen -->
+          <div class="resumen-panel">
+            <h3 class="resumen-panel__titulo">
+              <i class="bi bi-receipt" style="color:var(--c-lime)"></i> Resumen del pedido
+            </h3>
+
+            <div class="resumen-linea">
+              <span>Subtotal</span>
+              <span id="subtotal-carrito">$0.00</span>
+            </div>
+            <div class="resumen-linea">
+              <span>Envío</span>
+              <span class="text-muted text-sm">A calcular por WA</span>
+            </div>
+            <div class="resumen-linea total">
+              <span>Total estimado</span>
+              <span id="total-carrito">$0.00</span>
+            </div>
+
+            <p class="resumen-nota">
+              <i class="bi bi-info-circle" style="color:var(--c-lime)"></i>
+              El costo de envío depende de tu ubicación y el peso del pedido. Se cotizará por WhatsApp antes del despacho.
+            </p>
+
+            <div style="display:flex;flex-direction:column;gap:.75rem;margin-top:1.5rem">
+              <a href="tienda.html" class="btn btn-secondary btn-full">
+                <i class="bi bi-arrow-left"></i> Seguir comprando
+              </a>
+            </div>
+          </div>
+
+          <!-- Consulta de estado de pedido -->
+          <div class="consulta-pedido" style="margin-top:1.5rem">
+            <h4 class="consulta-pedido__titulo">
+              <i class="bi bi-search"></i> Consultar estado de pedido
+            </h4>
+            <p class="text-sm text-muted" style="margin-bottom:1rem">
+              Ingresa el ID de tu pedido para ver su estado actual.
+            </p>
+            <form class="consulta-form" id="form-consultar-pedido">
+              <input class="campo-input" id="input-id-pedido" type="text"
+                     placeholder="Ej: AGR-LXK2K-7F" autocomplete="off">
+              <button type="submit" class="btn btn-secondary" style="flex-shrink:0">
+                <i class="bi bi-search"></i> Buscar
+              </button>
+            </form>
+            <div id="resultado-consulta"></div>
+          </div>
+
+        </div>
+      </div><!-- /carrito-layout -->
+    </div>
+  </section>
+
+</main>
+
+<!-- ── FOOTER ─────────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="contenedor footer__grid">
+    <div>
+      <div class="footer__logo">AGRO<span style="color:var(--c-cream)">MEDIC</span></div>
+      <p class="footer__desc">Salud animal con ciencia y naturaleza.</p>
+    </div>
+    <div>
+      <h4 class="footer__col-title">Navegación</h4>
+      <ul class="footer__links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="tienda.html">Tienda</a></li>
+        <li><a href="mayoristas.html">Mayoristas</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="footer__col-title">Soporte</h4>
+      <ul class="footer__links">
+        <li><a href="#">Política de envíos</a></li>
+        <li><a href="#">Términos y condiciones</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="footer__col-title">Contacto</h4>
+      <p class="footer__contact-item"><i class="bi bi-whatsapp"></i> +58 422 639 6237</p>
+      <p class="footer__contact-item"><i class="bi bi-geo-alt"></i> Valencia, Venezuela</p>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <p class="footer__copy">© 2025 Agromedic C.A. Todos los derechos reservados.</p>
+    <span class="footer__badge"><i class="bi bi-circle-fill" style="font-size:.4rem"></i> Conectado a Kont SaaS</span>
+  </div>
+</footer>
+
+<!-- ── TOAST ───────────────────────────────────────────────── -->
+<div class="toast" id="toast-global" role="alert" aria-live="polite">
+  <i class="bi bi-check-circle-fill toast__icon" id="toast-icono"></i>
+  <span class="toast__texto" id="toast-texto"></span>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>

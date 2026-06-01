@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Detalle de producto — Agromedic Venezuela">
+  <title>Cargando producto… | AGROMEDIC</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Sistema de diseño Agromedic -->
+  <link rel="stylesheet" href="css/main.css">
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+
+<!-- ── HEADER ─────────────────────────────────────────────── -->
+<header class="header" id="header">
+  <div class="contenedor header__inner">
+    <a href="index.html" class="header__logo">
+      <span class="header__logo-dot"></span>AGRO<span>MEDIC</span>
+    </a>
+
+    <nav class="nav" aria-label="Navegación principal">
+      <a href="index.html"      class="nav__link">Inicio</a>
+      <a href="tienda.html"     class="nav__link activo">Tienda</a>
+      <a href="mayoristas.html" class="nav__link">Mayoristas</a>
+      <a href="contacto.html"   class="nav__link">Contacto</a>
+    </nav>
+
+    <div class="header__acciones">
+      <a href="carrito.html" class="btn-carrito" aria-label="Ver carrito">
+        <i class="bi bi-basket3"></i>
+        <span class="contador-carrito" id="contador-carrito">0</span>
+      </a>
+      <button class="btn-menu" id="btn-menu" aria-label="Menú" aria-expanded="false">
+        <span class="btn-menu__line"></span>
+        <span class="btn-menu__line"></span>
+        <span class="btn-menu__line"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ── DRAWER MOBILE ──────────────────────────────────────── -->
+<div class="nav-drawer" id="nav-drawer" role="dialog" aria-modal="true">
+  <div class="nav-drawer__overlay"></div>
+  <div class="nav-drawer__panel">
+    <a href="index.html"      class="nav-drawer__link">Inicio</a>
+    <a href="tienda.html"     class="nav-drawer__link activo">Tienda</a>
+    <a href="mayoristas.html" class="nav-drawer__link">Mayoristas</a>
+    <a href="contacto.html"   class="nav-drawer__link">Contacto</a>
+    <div class="nav-drawer__footer">© 2025 Agromedic C.A.</div>
+  </div>
+</div>
+
+<main>
+
+  <!-- ── BREADCRUMB ─────────────────────────────────────── -->
+  <nav class="prod-breadcrumb" aria-label="Ruta de navegación" id="prod-breadcrumb">
+    <div class="contenedor prod-breadcrumb__inner">
+      <a href="index.html" class="prod-breadcrumb__link">
+        <i class="bi bi-house"></i> Inicio
+      </a>
+      <i class="bi bi-chevron-right prod-breadcrumb__sep"></i>
+      <a href="tienda.html" class="prod-breadcrumb__link">Tienda</a>
+      <i class="bi bi-chevron-right prod-breadcrumb__sep"></i>
+      <!-- Categoría inyectada dinámicamente -->
+      <span class="prod-breadcrumb__link skeleton-inline" id="bc-categoria"
+            style="width:80px;height:14px;display:inline-block"></span>
+      <i class="bi bi-chevron-right prod-breadcrumb__sep"></i>
+      <!-- Nombre inyectado dinámicamente -->
+      <span class="prod-breadcrumb__current skeleton-inline" id="bc-nombre"
+            style="width:140px;height:14px;display:inline-block"></span>
+    </div>
+  </nav>
+
+  <!-- ── DETALLE PRINCIPAL ──────────────────────────────── -->
+  <section class="prod-section" id="prod-section">
+    <div class="contenedor">
+
+      <!-- Estado: Error / No encontrado (oculto por defecto) -->
+      <div class="prod-error" id="prod-error" style="display:none" role="alert">
+        <div class="prod-error__icon"><i class="bi bi-exclamation-triangle"></i></div>
+        <h2 class="prod-error__titulo">Producto no encontrado</h2>
+        <p class="prod-error__desc" id="prod-error-desc">
+          El producto que buscas no existe o no está disponible en este momento.
+        </p>
+        <div class="prod-error__acciones">
+          <a href="tienda.html" class="btn btn-primary">
+            <i class="bi bi-arrow-left"></i> Volver a la Tienda
+          </a>
+          <a href="index.html" class="btn btn-secondary">
+            <i class="bi bi-house"></i> Ir al Inicio
+          </a>
+        </div>
+      </div>
+
+      <!-- Layout dos columnas (visible durante carga y con datos) -->
+      <article class="prod-layout" id="prod-layout" aria-label="Detalle del producto">
+
+        <!-- ═══ COLUMNA IZQUIERDA: Galería ═══ -->
+        <div class="prod-galeria">
+
+          <!-- Imagen principal -->
+          <div class="prod-galeria__main" id="galeria-main">
+            <!-- Skeleton imagen -->
+            <div class="prod-img-wrap prod-img-wrap--skeleton" id="prod-img-wrap">
+              <div class="skeleton prod-img-skeleton" id="prod-img-skeleton"></div>
+              <img
+                src=""
+                alt=""
+                class="prod-img"
+                id="prod-img"
+                style="display:none"
+                loading="eager"
+              >
+              <!-- Badge destacado (inyectado si aplica) -->
+              <div class="prod-img-badges" id="prod-img-badges"></div>
+            </div>
+          </div>
+
+          <!-- Thumbnails (inyectados si hay galería extra) -->
+          <div class="prod-galeria__thumbs" id="prod-thumbs" style="display:none"></div>
+
+          <!-- Tags de seguridad -->
+          <div class="prod-trust" id="prod-trust" style="opacity:0">
+            <div class="prod-trust__item">
+              <i class="bi bi-shield-check"></i>
+              <span>Producto certificado</span>
+            </div>
+            <div class="prod-trust__item">
+              <i class="bi bi-truck"></i>
+              <span>Envío a todo Venezuela</span>
+            </div>
+            <div class="prod-trust__item">
+              <i class="bi bi-arrow-counterclockwise"></i>
+              <span>Garantía del proveedor</span>
+            </div>
+          </div>
+        </div><!-- /col galería -->
+
+        <!-- ═══ COLUMNA DERECHA: Información ═══ -->
+        <div class="prod-info" id="prod-info">
+
+          <!-- Tag categoría -->
+          <div class="prod-info__tags" id="prod-tags">
+            <div class="skeleton-inline" style="width:90px;height:24px;border-radius:999px"></div>
+          </div>
+
+          <!-- Título -->
+          <h1 class="prod-info__titulo" id="prod-titulo">
+            <div class="skeleton-block" style="height:36px;width:85%;margin-bottom:.5rem"></div>
+            <div class="skeleton-block" style="height:36px;width:60%"></div>
+          </h1>
+
+          <!-- Precio -->
+          <div class="prod-info__precio-wrap" id="prod-precio-wrap">
+            <div class="skeleton-inline" style="width:100px;height:44px;border-radius:8px"></div>
+          </div>
+
+          <!-- Divider -->
+          <hr class="prod-divider">
+
+          <!-- Descripción -->
+          <div class="prod-info__desc-wrap">
+            <div class="skeleton-block" style="height:14px;width:100%;margin-bottom:.5rem"></div>
+            <div class="skeleton-block" style="height:14px;width:95%;margin-bottom:.5rem"></div>
+            <div class="skeleton-block" style="height:14px;width:80%"></div>
+          </div>
+
+          <!-- Beneficios -->
+          <div class="prod-beneficios" id="prod-beneficios" style="display:none">
+            <h3 class="prod-beneficios__titulo">
+              <i class="bi bi-stars"></i> Beneficios Clave
+            </h3>
+            <ul class="prod-beneficios__lista" id="prod-beneficios-lista"></ul>
+          </div>
+
+          <!-- Divider -->
+          <hr class="prod-divider" id="prod-divider-2" style="opacity:0">
+
+          <!-- Selector cantidad + CTA -->
+          <div class="prod-cta" id="prod-cta" style="opacity:0">
+
+            <div class="prod-cta__qty-wrap">
+              <label class="campo-label" for="qty-input">Cantidad</label>
+              <div class="prod-qty">
+                <button class="prod-qty__btn" id="qty-menos" aria-label="Disminuir cantidad">
+                  <i class="bi bi-dash"></i>
+                </button>
+                <input
+                  class="prod-qty__input"
+                  id="qty-input"
+                  type="number"
+                  value="1"
+                  min="1"
+                  max="99"
+                  aria-label="Cantidad"
+                  readonly
+                >
+                <button class="prod-qty__btn" id="qty-mas" aria-label="Aumentar cantidad">
+                  <i class="bi bi-plus"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="prod-cta__btns">
+              <button class="btn btn-primary btn-xl prod-cta__agregar" id="btn-agregar-carrito" disabled>
+                <i class="bi bi-cart-plus"></i>
+                <span>Añadir al Carrito</span>
+              </button>
+              <a
+                class="btn btn-secondary btn-xl prod-cta__ws"
+                id="btn-consultar-ws"
+                href="#"
+                target="_blank"
+                rel="noopener"
+              >
+                <i class="bi bi-whatsapp"></i>
+                <span>Consultar</span>
+              </a>
+            </div>
+
+            <p class="prod-cta__nota">
+              <i class="bi bi-info-circle"></i>
+              El precio final puede variar según la cantidad y el flete. Confirmamos por WhatsApp.
+            </p>
+          </div><!-- /prod-cta -->
+
+          <!-- SKU / ID técnico -->
+          <p class="prod-info__sku" id="prod-sku" style="opacity:0"></p>
+
+        </div><!-- /col info -->
+
+      </article><!-- /prod-layout -->
+    </div>
+  </section>
+
+  <!-- ── SECCIÓN: DESCRIPCIÓN COMPLETA + SPECS ─────────── -->
+  <section class="prod-tabs-section" id="prod-tabs-section" style="display:none">
+    <div class="contenedor">
+
+      <!-- Tabs navegación -->
+      <div class="prod-tabs" role="tablist">
+        <button class="prod-tab activo" data-tab="descripcion" role="tab" aria-selected="true">
+          Descripción completa
+        </button>
+        <button class="prod-tab" data-tab="especificaciones" role="tab" aria-selected="false">
+          Especificaciones
+        </button>
+        <button class="prod-tab" data-tab="envio" role="tab" aria-selected="false">
+          Envío y pago
+        </button>
+      </div>
+
+      <!-- Paneles -->
+      <div class="prod-tab-panel activo" id="tab-descripcion" role="tabpanel">
+        <div class="prod-tab-content" id="tab-desc-content">
+          <!-- Inyectado por JS -->
+        </div>
+      </div>
+
+      <div class="prod-tab-panel" id="tab-especificaciones" role="tabpanel">
+        <table class="prod-specs-table" id="prod-specs-table">
+          <!-- Inyectado por JS -->
+        </table>
+      </div>
+
+      <div class="prod-tab-panel" id="tab-envio" role="tabpanel">
+        <div class="prod-envio-info">
+          <div class="prod-envio-item">
+            <div class="prod-envio-item__icon"><i class="bi bi-truck"></i></div>
+            <div>
+              <h4>Envío Nacional</h4>
+              <p>Despachamos a los 23 estados vía MRW, Zoom y Tealca. El costo varía según el peso y la ubicación.</p>
+            </div>
+          </div>
+          <div class="prod-envio-item">
+            <div class="prod-envio-item__icon"><i class="bi bi-currency-dollar"></i></div>
+            <div>
+              <h4>Métodos de Pago</h4>
+              <p>Pago Móvil · Transferencia Bancaria · Zelle · Binance Pay (USDT) · Efectivo (USD / BsD)</p>
+            </div>
+          </div>
+          <div class="prod-envio-item">
+            <div class="prod-envio-item__icon"><i class="bi bi-clock-history"></i></div>
+            <div>
+              <h4>Tiempo de Entrega</h4>
+              <p>2 a 5 días hábiles dependiendo del estado. Caracas y Valencia: 24–48 horas.</p>
+            </div>
+          </div>
+          <div class="prod-envio-item">
+            <div class="prod-envio-item__icon"><i class="bi bi-whatsapp"></i></div>
+            <div>
+              <h4>Confirmación por WhatsApp</h4>
+              <p>Nuestro equipo confirma disponibilidad, flete final y coordina el despacho directamente contigo.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── PRODUCTOS RELACIONADOS ─────────────────────────── -->
+  <section class="prod-relacionados" id="prod-relacionados" style="display:none">
+    <div class="contenedor">
+      <div class="section__header" style="margin-bottom:2rem">
+        <span class="section__tag"><i class="bi bi-grid"></i> También te puede interesar</span>
+        <h2 style="margin-top:.5rem">Productos <em class="text-lime">relacionados</em></h2>
+      </div>
+      <div class="productos-grid" id="relacionados-grid"></div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ── FOOTER ─────────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="contenedor footer__grid">
+    <div>
+      <div class="footer__logo">AGRO<span style="color:var(--c-cream)">MEDIC</span></div>
+      <p class="footer__desc">Salud animal con ciencia y naturaleza.</p>
+      <div class="footer__social">
+        <a href="#" class="footer__social-link" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+        <a href="#" class="footer__social-link" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+        <a href="https://wa.me/584226396237" class="footer__social-link" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+      </div>
+    </div>
+    <div>
+      <h4 class="footer__col-title">Navegación</h4>
+      <ul class="footer__links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="tienda.html">Tienda</a></li>
+        <li><a href="mayoristas.html">Mayoristas</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="footer__col-title">Legal</h4>
+      <ul class="footer__links">
+        <li><a href="#">Privacidad</a></li>
+        <li><a href="#">Términos</a></li>
+        <li><a href="#">Envíos</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="footer__col-title">Contacto</h4>
+      <p class="footer__contact-item"><i class="bi bi-whatsapp"></i> +58 422 639 6237</p>
+      <p class="footer__contact-item"><i class="bi bi-envelope"></i> info@agromedic.com</p>
+      <p class="footer__contact-item"><i class="bi bi-geo-alt"></i> Valencia, Venezuela</p>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <p class="footer__copy">© 2025 Agromedic C.A. Todos los derechos reservados.</p>
+    <span class="footer__badge"><i class="bi bi-circle-fill" style="font-size:.4rem"></i> Conectado a Kont SaaS</span>
+  </div>
+</footer>
+
+<!-- ── TOAST ───────────────────────────────────────────────── -->
+<div class="toast" id="toast-global" role="alert" aria-live="polite">
+  <i class="bi bi-check-circle-fill toast__icon" id="toast-icono"></i>
+  <span class="toast__texto" id="toast-texto"></span>
+</div>
+
+<!-- Scripts (app.js primero para carrito/header, luego producto.js) -->
+<script src="js/app.js"></script>
+<script src="js/productos.js"></script>
+</body>
+</html>

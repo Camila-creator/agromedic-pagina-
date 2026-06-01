@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Solicita tu cotización mayorista — Agromedic Venezuela. Precios especiales para distribuidores, clínicas y ganaderos.">
+  <title>Mayoristas | AGROMEDIC</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/componentes.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <style>
+    /* ── HERO MAYORISTAS ── */
+    .may-hero {
+      position: relative;
+      padding-block: 5rem 4rem;
+      border-bottom: 1px solid var(--c-border);
+      overflow: hidden;
+      background: linear-gradient(160deg, var(--c-bg-2) 0%, var(--c-bg) 60%);
+    }
+
+    .may-hero::before {
+      content: '';
+      position: absolute;
+      top: -120px; right: -120px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(170,255,60,.1) 0%, transparent 65%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .may-hero__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--sp-6);
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (min-width: 900px) {
+      .may-hero__grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    .may-hero__titulo { margin-bottom: var(--sp-2); }
+
+    .may-hero__desc {
+      color: var(--c-text-muted);
+      font-size: 1rem;
+      max-width: 480px;
+      line-height: 1.7;
+      margin-bottom: var(--sp-4);
+    }
+
+    .may-hero__beneficios {
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+    }
+
+    .may-beneficio {
+      display: flex;
+      align-items: flex-start;
+      gap: .75rem;
+      font-size: .9rem;
+      color: var(--c-text-muted);
+    }
+
+    .may-beneficio i {
+      color: var(--c-lime);
+      font-size: 1rem;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    /* Tarjetas de beneficio en el hero derecho */
+    .may-cards-stack {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--sp-2);
+    }
+
+    .may-card-mini {
+      background: var(--c-surface);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius-md);
+      padding: var(--sp-3);
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+      transition: border-color var(--t-fast), transform var(--t-med) var(--ease);
+    }
+
+    .may-card-mini:hover {
+      border-color: var(--c-border-2);
+      transform: translateY(-2px);
+    }
+
+    .may-card-mini__icon {
+      width: 40px; height: 40px;
+      border-radius: var(--radius-sm);
+      background: var(--c-lime-pale);
+      border: 1px solid var(--c-border-2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      color: var(--c-lime);
+    }
+
+    .may-card-mini__label {
+      font-family: var(--font-display);
+      font-size: .85rem;
+      font-weight: 700;
+      color: var(--c-cream);
+      line-height: 1.2;
+    }
+
+    .may-card-mini__desc {
+      font-size: .75rem;
+      color: var(--c-text-muted);
+      line-height: 1.4;
+    }
+
+    /* ── LAYOUT PRINCIPAL ── */
+    .may-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--sp-6);
+      align-items: start;
+      padding-block: var(--sp-8);
+    }
+
+    @media (min-width: 1024px) {
+      .may-layout { grid-template-columns: 1fr 340px; }
+    }
+
+    /* ── FORMULARIO ── */
+    .may-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    /* Pasos del formulario */
+    .may-step {
+      background: var(--c-surface);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-bottom: var(--sp-3);
+      transition: border-color var(--t-fast);
+    }
+
+    .may-step:focus-within { border-color: var(--c-border-2); }
+
+    .may-step__header {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+      padding: var(--sp-3) var(--sp-4);
+      background: var(--c-surface-2);
+      border-bottom: 1px solid var(--c-border);
+    }
+
+    .may-step__num {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: var(--c-lime);
+      color: var(--c-bg);
+      font-family: var(--font-display);
+      font-size: .85rem;
+      font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .may-step__titulo {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--c-cream);
+    }
+
+    .may-step__subtitulo {
+      font-size: .78rem;
+      color: var(--c-text-muted);
+      margin-top: .1rem;
+    }
+
+    .may-step__body {
+      padding: var(--sp-4);
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-2);
+    }
+
+    /* Checkboxes de interés */
+    .check-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: .5rem;
+    }
+
+    @media (min-width: 480px) {
+      .check-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (min-width: 768px) {
+      .check-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      padding: .75rem 1rem;
+      background: var(--c-bg-2);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all var(--t-fast);
+      user-select: none;
+    }
+
+    .check-item:hover { border-color: var(--c-border-2); }
+
+    .check-item input[type="checkbox"] {
+      display: none;
+    }
+
+    .check-item__box {
+      width: 20px; height: 20px;
+      border-radius: 5px;
+      border: 1.5px solid var(--c-border-2);
+      background: var(--c-surface);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: all var(--t-fast);
+    }
+
+    .check-item__box i {
+      font-size: .7rem;
+      color: var(--c-bg);
+      opacity: 0;
+      transform: scale(0);
+      transition: all var(--t-fast);
+    }
+
+    .check-item input:checked ~ .check-item__box {
+      background: var(--c-lime);
+      border-color: var(--c-lime);
+    }
+
+    .check-item input:checked ~ .check-item__box i {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .check-item:has(input:checked) {
+      border-color: var(--c-lime);
+      background: var(--c-lime-pale);
+    }
+
+    .check-item__label {
+      font-size: .85rem;
+      font-weight: 500;
+      color: var(--c-text);
+      line-height: 1.3;
+    }
+
+    /* Radio tipo negocio */
+    .tipo-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: .5rem;
+    }
+
+    @media (min-width: 560px) {
+      .tipo-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+
+    .tipo-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .4rem;
+      padding: 1rem .75rem;
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius-md);
+      background: var(--c-bg-2);
+      cursor: pointer;
+      transition: all var(--t-fast);
+      text-align: center;
+      user-select: none;
+    }
+
+    .tipo-btn:hover { border-color: var(--c-border-2); }
+    .tipo-btn.activo {
+      border-color: var(--c-lime);
+      background: var(--c-lime-pale);
+    }
+
+    .tipo-btn i { font-size: 1.5rem; color: var(--c-text-muted); transition: color var(--t-fast); }
+    .tipo-btn.activo i { color: var(--c-lime); }
+
+    .tipo-btn span {
+      font-size: .78rem;
+      font-weight: 600;
+      color: var(--c-text-muted);
+      line-height: 1.2;
+      transition: color var(--t-fast);
+    }
+    .tipo-btn.activo span { color: var(--c-lime); }
+
+    /* Campo condicional ganadero */
+    .campo-condicional {
+      display: none;
+      flex-direction: column;
+      gap: var(--sp-2);
+      padding: var(--sp-3);
+      background: var(--c-bg-2);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius-md);
+      animation: fade-in-up var(--t-fast) var(--ease);
+    }
+
+    .campo-condicional.visible { display: flex; }
+
+    /* Toggle factura */
+    .toggle-factura {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      padding: .85rem 1rem;
+      background: var(--c-bg-2);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .toggle-factura input { display: none; }
+
+    .toggle-track {
+      width: 40px; height: 22px;
+      border-radius: 11px;
+      background: var(--c-border-2);
+      position: relative;
+      flex-shrink: 0;
+      transition: background var(--t-fast);
+    }
+
+    .toggle-track::after {
+      content: '';
+      position: absolute;
+      top: 3px; left: 3px;
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background: var(--c-text-faint);
+      transition: all var(--t-fast) var(--ease);
+    }
+
+    .toggle-factura:has(input:checked) .toggle-track {
+      background: var(--c-lime);
+    }
+
+    .toggle-factura:has(input:checked) .toggle-track::after {
+      left: 21px;
+      background: var(--c-bg);
+    }
+
+    .toggle-label {
+      font-size: .9rem;
+      font-weight: 500;
+      color: var(--c-text);
+    }
+
+    /* ── SIDEBAR ── */
+    .may-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-3);
+      position: sticky;
+      top: calc(var(--header-h) + 1rem);
+    }
+
+    .sidebar-card {
+      background: var(--c-surface);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-4);
+    }
+
+    .sidebar-card__titulo {
+      font-family: var(--font-display);
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--c-cream);
+      margin-bottom: var(--sp-2);
+      padding-bottom: var(--sp-2);
+      border-bottom: 1px solid var(--c-border);
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+
+    .sidebar-card__titulo i { color: var(--c-lime); }
+
+    .sidebar-lista {
+      display: flex;
+      flex-direction: column;
+      gap: .6rem;
+    }
+
+    .sidebar-lista li {
+      display: flex;
+      align-items: flex-start;
+      gap: .6rem;
+      font-size: .85rem;
+      color: var(--c-text-muted);
+      line-height: 1.4;
+    }
+
+    .sidebar-lista li i { color: var(--c-lime); flex-shrink: 0; margin-top: 2px; }
+
+    .sidebar-contacto-item {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      padding: .75rem;
+      background: var(--c-bg-2);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--c-border);
+      font-size: .85rem;
+      color: var(--c-text-muted);
+      text-decoration: none;
+      transition: border-color var(--t-fast), color var(--t-fast);
+      margin-bottom: .5rem;
+    }
+
+    .sidebar-contacto-item:hover {
+      border-color: var(--c-lime);
+      color: var(--c-lime);
+    }
+
+    .sidebar-contacto-item i { font-size: 1.1rem; flex-shrink: 0; color: var(--c-lime); }
+
+    /* ── CONFIRMACIÓN MAYORISTAS ── */
+    .may-confirmacion {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: var(--sp-3);
+      padding: var(--sp-8) var(--sp-4);
+    }
+
+    /* Animación entry formulario */
+    .may-step {
+      animation: fade-in-up var(--t-slow) var(--ease) both;
+    }
+
+    .may-step:nth-child(1) { animation-delay: 0ms; }
+    .may-step:nth-child(2) { animation-delay: 80ms; }
+    .may-step:nth-child(3) { animation-delay: 160ms; }
+    .may-step:nth-child(4) { animation-delay: 240ms; }
+
+    @keyframes fade-in-up {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HEADER ─────────────────────────────────────────────── -->
+<header class="header scrolled" id="header">
+  <div class="contenedor header__inner">
+    <a href="index.html" class="header__logo">
+      <span class="header__logo-dot"></span>AGRO<span>MEDIC</span>
+    </a>
+
+    <nav class="nav" aria-label="Navegación principal">
+      <a href="index.html"   class="nav__link">Inicio</a>
+      <a href="tienda.html"  class="nav__link">Tienda</a>
+      <a href="mayoristas.html" class="nav__link">Mayoristas</a>
+      <a href="contacto.html"   class="nav__link">Contacto</a>
+      <a href="comparador.html"   class="nav__link">Comparador</a>
+      <a href="calculadora.html"   class="nav__link">Calculadora</a>
+    </nav>
+
+    <div class="header__acciones">
+      <a href="carrito.html" class="btn-carrito" aria-label="Ver carrito">
+        <i class="bi bi-basket3"></i>
+        <span class="contador-carrito" id="contador-carrito">0</span>
+      </a>
+      <button class="btn-menu" id="btn-menu" aria-label="Menú" aria-expanded="false">
+        <span class="btn-menu__line"></span>
+        <span class="btn-menu__line"></span>
+        <span class="btn-menu__line"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ── DRAWER MOBILE ──────────────────────────────────────── -->
+<div class="nav-drawer" id="nav-drawer" role="dialog" aria-modal="true">
+  <div class="nav-drawer__overlay"></div>
+  <div class="nav-drawer__panel">
+    <a href="index.html"      class="nav-drawer__link">Inicio</a>
+    <a href="tienda.html"     class="nav-drawer__link">Tienda</a>
+    <a href="mayoristas.html" class="nav-drawer__link activo">Mayoristas</a>
+    <a href="contacto.html"   class="nav-drawer__link">Contacto</a>
+    <a href="comparador.html"   class="nav-drawer__link">Comparador</a>
+    <a href="calculadora.html"   class="nav-drawer__link">Calculadora</a>
+    <div class="nav-drawer__footer">© 2025 Agromedic C.A.</div>
+  </div>
+</div>
+
+<main>
+
+  <!-- ── HERO ───────────────────────────────────────────────── -->
+  <section class="may-hero">
+    <div class="contenedor may-hero__grid">
+
+      <div>
+        <span class="section__tag" style="margin-bottom:var(--sp-3)">
+          <i class="bi bi-building"></i> Canal Mayorista
+        </span>
+        <h1 class="may-hero__titulo">
+          Precios especiales<br>para tu <em class="text-lime">negocio.</em>
+        </h1>
+        <p class="may-hero__desc">
+          Distribuidores, clínicas veterinarias, tiendas agropecuarias y ganaderos califican para cotizaciones por volumen con atención personalizada de nuestro equipo comercial.
+        </p>
+
+        <div class="may-hero__beneficios">
+          <div class="may-beneficio">
+            <i class="bi bi-check-circle-fill"></i>
+            <span>Precios diferenciados por volumen de compra</span>
+          </div>
+          <div class="may-beneficio">
+            <i class="bi bi-check-circle-fill"></i>
+            <span>Crédito y facilidades de pago para clientes recurrentes</span>
+          </div>
+          <div class="may-beneficio">
+            <i class="bi bi-check-circle-fill"></i>
+            <span>Facturación fiscal disponible con RIF</span>
+          </div>
+          <div class="may-beneficio">
+            <i class="bi bi-check-circle-fill"></i>
+            <span>Asesoría técnica veterinaria incluida</span>
+          </div>
+          <div class="may-beneficio">
+            <i class="bi bi-check-circle-fill"></i>
+            <span>Despacho directo a todo Venezuela (MRW · Zoom · Tealca)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tarjetas de beneficio -->
+      <div class="may-cards-stack">
+        <div class="may-card-mini">
+          <div class="may-card-mini__icon"><i class="bi bi-shop-window"></i></div>
+          <p class="may-card-mini__label">Tiendas & Distribuidores</p>
+          <p class="may-card-mini__desc">Revende con margen desde el primer pedido</p>
+        </div>
+        <div class="may-card-mini">
+          <div class="may-card-mini__icon"><i class="bi bi-heart-pulse"></i></div>
+          <p class="may-card-mini__label">Clínicas Veterinarias</p>
+          <p class="may-card-mini__desc">Precios de proveedor para tu práctica</p>
+        </div>
+        <div class="may-card-mini">
+          <div class="may-card-mini__icon"><i class="bi bi-piggy-bank"></i></div>
+          <p class="may-card-mini__label">Ganaderos & Productores</p>
+          <p class="may-card-mini__desc">Cotizaciones por lote para tu explotación</p>
+        </div>
+        <div class="may-card-mini">
+          <div class="may-card-mini__icon"><i class="bi bi-truck"></i></div>
+          <p class="may-card-mini__label">Respuesta en 24h</p>
+          <p class="may-card-mini__desc">Un asesor te contacta el mismo día hábil</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── LAYOUT FORM + SIDEBAR ──────────────────────────────── -->
+  <div class="contenedor">
+    <div class="may-layout">
+
+      <!-- ══ FORMULARIO ══ -->
+      <div>
+        <h2 style="margin-bottom:var(--sp-4)">
+          Solicitud de <em class="text-lime">Cotización</em>
+        </h2>
+
+        <!-- Confirmación (oculta hasta envío) -->
+        <div class="may-confirmacion" id="may-confirmacion">
+          <div class="confirmacion-icon"><i class="bi bi-building-check"></i></div>
+          <h2 class="text-cream">¡Solicitud enviada!</h2>
+          <p class="text-muted" style="max-width:440px">
+            Tu solicitud de cotización ha sido recibida. Un asesor comercial de Agromedic se comunicará contigo por WhatsApp dentro de las próximas <strong class="text-cream">24 horas hábiles.</strong>
+          </p>
+          <a href="index.html" class="btn btn-primary btn-lg" style="margin-top:1rem">
+            <i class="bi bi-house"></i> Volver al inicio
+          </a>
+        </div>
+
+        <form class="may-form" id="formulario-mayorista" novalidate>
+
+          <!-- ── PASO 1: DATOS DE CONTACTO ── -->
+          <div class="may-step">
+            <div class="may-step__header">
+              <div class="may-step__num">1</div>
+              <div>
+                <p class="may-step__titulo">Datos de Contacto y Ubicación</p>
+                <p class="may-step__subtitulo">Información personal y de tu empresa</p>
+              </div>
+            </div>
+            <div class="may-step__body">
+
+              <div class="form-fila">
+                <div class="campo-wrap">
+                  <label class="campo-label" for="m-nombre">Nombre y Apellido *</label>
+                  <input class="campo-input" id="m-nombre" name="nombre" type="text"
+                         placeholder="Ej: José Rodríguez" required autocomplete="name">
+                </div>
+                <div class="campo-wrap">
+                  <label class="campo-label" for="m-telefono">WhatsApp *</label>
+                  <input class="campo-input" id="m-telefono" name="telefono" type="tel"
+                         placeholder="Ej: 0412 555 1234" required autocomplete="tel">
+                </div>
+              </div>
+
+              <div class="campo-wrap">
+                <label class="campo-label" for="m-email">Correo Electrónico *</label>
+                <input class="campo-input" id="m-email" name="email" type="email"
+                       placeholder="tu@empresa.com" required autocomplete="email">
+              </div>
+
+              <div class="form-fila">
+                <div class="campo-wrap">
+                  <label class="campo-label" for="m-empresa">Nombre de la Empresa / Granja *</label>
+                  <input class="campo-input" id="m-empresa" name="empresa" type="text"
+                         placeholder="Ej: Distribuidora Agrícola Sur" required>
+                </div>
+                <div class="campo-wrap">
+                  <label class="campo-label" for="m-cargo">Cargo / Posición *</label>
+                  <input class="campo-input" id="m-cargo" name="cargo" type="text"
+                         placeholder="Ej: Dueño / Gerente / Compras" required>
+                </div>
+              </div>
+
+              <div class="form-fila">
+                <div class="campo-wrap">
+                  <label class="campo-label" for="may-select-estado">Estado *</label>
+                  <select class="campo-select" id="may-select-estado" name="estado" required>
+                    <option value="">Selecciona tu Estado</option>
+                  </select>
+                </div>
+                <div class="campo-wrap">
+                  <label class="campo-label" for="may-select-ciudad">Ciudad *</label>
+                  <select class="campo-select" id="may-select-ciudad" name="ciudad" required>
+                    <option value="">Selecciona tu Ciudad</option>
+                  </select>
+                </div>
+              </div>
+
+            </div>
+          </div><!-- /paso 1 -->
+
+          <!-- ── PASO 2: TIPO DE NEGOCIO ── -->
+          <div class="may-step">
+            <div class="may-step__header">
+              <div class="may-step__num">2</div>
+              <div>
+                <p class="may-step__titulo">Tipo de Negocio y Enfoque</p>
+                <p class="may-step__subtitulo">Cuéntanos sobre tu operación</p>
+              </div>
+            </div>
+            <div class="may-step__body">
+
+              <!-- Tipo de cliente -->
+              <div class="campo-wrap">
+                <label class="campo-label">¿Qué tipo de negocio es? *</label>
+                <div class="tipo-grid" id="tipo-grid" role="group" aria-label="Tipo de negocio">
+                  <div class="tipo-btn" data-valor="Tienda/Distribuidor" tabindex="0" role="button">
+                    <i class="bi bi-shop-window"></i>
+                    <span>Tienda / Distribuidor</span>
+                  </div>
+                  <div class="tipo-btn" data-valor="Clínica Veterinaria" tabindex="0" role="button">
+                    <i class="bi bi-heart-pulse"></i>
+                    <span>Clínica Veterinaria</span>
+                  </div>
+                  <div class="tipo-btn" data-valor="Ganadero/Productor" tabindex="0" role="button">
+                    <i class="bi bi-piggy-bank"></i>
+                    <span>Ganadero / Productor</span>
+                  </div>
+                  <div class="tipo-btn" data-valor="Otro" tabindex="0" role="button">
+                    <i class="bi bi-three-dots"></i>
+                    <span>Otro</span>
+                  </div>
+                </div>
+                <input type="hidden" id="input-tipo-negocio" name="tipo_cliente_negocio" required>
+              </div>
+
+              <!-- Enfoque animal -->
+              <div class="campo-wrap">
+                <label class="campo-label" for="m-enfoque">Enfoque principal *</label>
+                <select class="campo-select" id="m-enfoque" name="enfoque_animal" required>
+                  <option value="">¿Ganado, mascotas o ambos?</option>
+                  <option value="Solo Ganado">Solo Ganado (Bovinos, Equinos, Ovinos…)</option>
+                  <option value="Solo Mascotas">Solo Mascotas (Perros, Gatos…)</option>
+                  <option value="Ambos">Ambos (Ganado y Mascotas)</option>
+                </select>
+              </div>
+
+              <!-- Campos condicionales ganadero -->
+              <div class="campo-condicional" id="campos-ganadero">
+                <p class="text-xs text-muted" style="margin-bottom:.25rem">
+                  <i class="bi bi-info-circle" style="color:var(--c-lime)"></i>
+                  Información adicional para productores ganaderos:
+                </p>
+                <div class="form-fila">
+                  <div class="campo-wrap">
+                    <label class="campo-label" for="m-tipo-ganado">Tipo de Explotación</label>
+                    <select class="campo-select" id="m-tipo-ganado" name="tipo_ganado">
+                      <option value="">Selecciona</option>
+                      <option value="Bovino (Doble propósito)">Bovino (Doble propósito)</option>
+                      <option value="Bovino (Carne)">Bovino (Carne)</option>
+                      <option value="Bovino (Leche)">Bovino (Leche)</option>
+                      <option value="Avícola">Avícola</option>
+                      <option value="Porcino">Porcino</option>
+                      <option value="Equino">Equino</option>
+                      <option value="Ovino/Caprino">Ovino / Caprino</option>
+                      <option value="Otro">Otro</option>
+                    </select>
+                  </div>
+                  <div class="campo-wrap">
+                    <label class="campo-label" for="m-cabezas">N.º de Cabezas (aprox.)</label>
+                    <input class="campo-input" id="m-cabezas" name="num_cabezas" type="number"
+                           min="1" placeholder="Ej: 150">
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div><!-- /paso 2 -->
+
+          <!-- ── PASO 3: PRODUCTOS DE INTERÉS ── -->
+          <div class="may-step">
+            <div class="may-step__header">
+              <div class="may-step__num">3</div>
+              <div>
+                <p class="may-step__titulo">Productos de Mayor Interés</p>
+                <p class="may-step__subtitulo">Selecciona todas las categorías que apliquen</p>
+              </div>
+            </div>
+            <div class="may-step__body">
+
+              <div class="check-grid" role="group" aria-label="Intereses de productos">
+
+                <label class="check-item">
+                  <input type="checkbox" name="intereses" value="Medicamentos Inyectables/Oral">
+                  <div class="check-item__box"><i class="bi bi-check-lg"></i></div>
+                  <span class="check-item__label">💊 Medicamentos Inyectables / Oral</span>
+                </label>
+
+                <label class="check-item">
+                  <input type="checkbox" name="intereses" value="Antiparasitarios">
+                  <div class="check-item__box"><i class="bi bi-check-lg"></i></div>
+                  <span class="check-item__label">🔬 Antiparasitarios (Internos/Externos)</span>
+                </label>
+
+                <label class="check-item">
+                  <input type="checkbox" name="intereses" value="Suplementos y Vitaminas">
+                  <div class="check-item__box"><i class="bi bi-check-lg"></i></div>
+                  <span class="check-item__label">🌿 Suplementos y Vitaminas</span>
+                </label>
+
+                <label class="check-item">
+                  <input type="checkbox" name="intereses" value="Cuidado de la Piel">
+                  <div class="check-item__box"><i class="bi bi-check-lg"></i></div>
+                  <span class="check-item__label">🧴 Cuidado de la Piel (Shampoos)</span>
+                </label>
+
+                <label class="check-item">
+                  <input type="checkbox" name="intereses" value="Herramientas Veterinarias">
+                  <div class="check-item__box"><i class="bi bi-check-lg"></i></div>
+                  <span class="check-item__label">🔧 Herramientas Veterinarias</span>
+                </label>
+
+                <label class="check-item">
+                  <input type="checkbox" name="intereses" value="Alimentos Especiales">
+                  <div class="check-item__box"><i class="bi bi-check-lg"></i></div>
+                  <span class="check-item__label">🌾 Alimentos Concentrados</span>
+                </label>
+
+              </div>
+
+              <p class="text-xs text-muted" style="margin-top:.25rem">
+                <i class="bi bi-info-circle" style="color:var(--c-lime)"></i>
+                No es obligatorio. Selecciona lo que planeas comprar con más frecuencia.
+              </p>
+
+            </div>
+          </div><!-- /paso 3 -->
+
+          <!-- ── PASO 4: SOLICITUD FINAL ── -->
+          <div class="may-step">
+            <div class="may-step__header">
+              <div class="may-step__num">4</div>
+              <div>
+                <p class="may-step__titulo">Solicitud y Datos Fiscales</p>
+                <p class="may-step__subtitulo">Detalla tu necesidad y requisitos de facturación</p>
+              </div>
+            </div>
+            <div class="may-step__body">
+
+              <!-- Toggle factura -->
+              <label class="toggle-factura">
+                <input type="checkbox" id="m-factura" name="factura_fiscal" value="si">
+                <div class="toggle-track"></div>
+                <span class="toggle-label">Necesito Factura Fiscal con RIF</span>
+              </label>
+
+              <!-- Campo RIF (condicional) -->
+              <div class="campo-condicional" id="campo-rif">
+                <div class="campo-wrap">
+                  <label class="campo-label" for="m-rif">RIF / Cédula Jurídica *</label>
+                  <input class="campo-input" id="m-rif" name="rif" type="text"
+                         placeholder="Ej: J-12345678-9" disabled>
+                </div>
+              </div>
+
+              <div class="campo-wrap">
+                <label class="campo-label" for="m-necesidad">Detalla tu solicitud *</label>
+                <textarea class="campo-textarea" id="m-necesidad" name="necesidad"
+                          rows="4" required
+                          placeholder="Describe los productos que necesitas, cantidades estimadas, frecuencia de compra u otras especificaciones…"></textarea>
+              </div>
+
+              <div class="campo-wrap">
+                <label class="campo-label" for="m-comentarios">Comentarios adicionales (opcional)</label>
+                <textarea class="campo-textarea" id="m-comentarios" name="comentarios"
+                          rows="2"
+                          placeholder="¿Tienes alguna solicitud especial o pregunta?"></textarea>
+              </div>
+
+              <!-- Submit -->
+              <button type="submit" class="btn btn-primary btn-full btn-xl" id="btn-may-submit">
+                <i class="bi bi-whatsapp"></i> Solicitar Cotización por WhatsApp
+              </button>
+
+              <p class="text-xs text-muted text-center" style="margin-top:.75rem">
+                <i class="bi bi-shield-lock" style="color:var(--c-lime)"></i>
+                Tu información es confidencial y solo será usada para preparar tu cotización.
+              </p>
+
+            </div>
+          </div><!-- /paso 4 -->
+
+        </form>
+      </div><!-- /col formulario -->
+
+      <!-- ══ SIDEBAR ══ -->
+      <div class="may-sidebar">
+
+        <!-- Por qué elegirnos -->
+        <div class="sidebar-card">
+          <h4 class="sidebar-card__titulo">
+            <i class="bi bi-star-fill"></i> ¿Por qué Agromedic?
+          </h4>
+          <ul class="sidebar-lista">
+            <li><i class="bi bi-check2-circle"></i> Más de 500 SKU en inventario permanente</li>
+            <li><i class="bi bi-check2-circle"></i> Productos con registro INSAI y SASA</li>
+            <li><i class="bi bi-check2-circle"></i> Asesoría técnica veterinaria sin costo</li>
+            <li><i class="bi bi-check2-circle"></i> Embalaje para transporte largo</li>
+            <li><i class="bi bi-check2-circle"></i> Alianzas con MRW, Zoom y Tealca</li>
+            <li><i class="bi bi-check2-circle"></i> Precios fijados en divisas (USD)</li>
+          </ul>
+        </div>
+
+        <!-- Contacto directo -->
+        <div class="sidebar-card">
+          <h4 class="sidebar-card__titulo">
+            <i class="bi bi-headset"></i> Contacto directo
+          </h4>
+          <p class="text-sm text-muted" style="margin-bottom:1rem;line-height:1.5">
+            ¿Prefieres hablar directamente con un asesor antes de llenar el formulario?
+          </p>
+          <a href="https://wa.me/584226396237?text=Hola%2C%20quiero%20información%20sobre%20precios%20mayoristas"
+             target="_blank" class="sidebar-contacto-item">
+            <i class="bi bi-whatsapp"></i>
+            <div>
+              <p style="font-weight:600;color:var(--c-cream);font-size:.85rem">WhatsApp Comercial</p>
+              <p>+58 422 639 6237</p>
+            </div>
+          </a>
+          <a href="mailto:mayoristas@agromedic.com" class="sidebar-contacto-item">
+            <i class="bi bi-envelope-fill"></i>
+            <div>
+              <p style="font-weight:600;color:var(--c-cream);font-size:.85rem">Email Mayoristas</p>
+              <p>mayoristas@agromedic.com</p>
+            </div>
+          </a>
+          <p class="text-xs text-muted" style="margin-top:.5rem">
+            Horario: Lun–Vie 8am–6pm · Sáb 9am–1pm
+          </p>
+        </div>
+
+        <!-- Mínimo de compra -->
+        <div class="sidebar-card" style="border-color:var(--c-border-2)">
+          <h4 class="sidebar-card__titulo">
+            <i class="bi bi-info-circle"></i> Condiciones generales
+          </h4>
+          <ul class="sidebar-lista">
+            <li><i class="bi bi-dot" style="font-size:1.2rem"></i> Pedido mínimo: $150 USD</li>
+            <li><i class="bi bi-dot" style="font-size:1.2rem"></i> Descuento desde 10 unidades por SKU</li>
+            <li><i class="bi bi-dot" style="font-size:1.2rem"></i> Crédito a 15 días (clientes frecuentes)</li>
+            <li><i class="bi bi-dot" style="font-size:1.2rem"></i> Cotización válida por 72 horas</li>
+          </ul>
+        </div>
+
+      </div><!-- /sidebar -->
+
+    </div>
+  </div>
+
+</main>
+
+<!-- ── FOOTER ─────────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="contenedor footer__grid">
+    <div>
+      <div class="footer__logo">AGRO<span style="color:var(--c-cream)">MEDIC</span></div>
+      <p class="footer__desc">Salud animal con ciencia y naturaleza. Distribución veterinaria en Venezuela.</p>
+      <div class="footer__social">
+        <a href="#" class="footer__social-link" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+        <a href="#" class="footer__social-link" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+        <a href="https://wa.me/584226396237" class="footer__social-link" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+      </div>
+    </div>
+    <div>
+      <h4 class="footer__col-title">Navegación</h4>
+      <ul class="footer__links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="tienda.html">Tienda</a></li>
+        <li><a href="mayoristas.html">Mayoristas</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="footer__col-title">Legal</h4>
+      <ul class="footer__links">
+        <li><a href="#">Política de Privacidad</a></li>
+        <li><a href="#">Términos y Condiciones</a></li>
+        <li><a href="#">Política de Envíos</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="footer__col-title">Contacto</h4>
+      <p class="footer__contact-item"><i class="bi bi-whatsapp"></i> +58 422 639 6237</p>
+      <p class="footer__contact-item"><i class="bi bi-envelope"></i> info@agromedic.com</p>
+      <p class="footer__contact-item"><i class="bi bi-geo-alt"></i> Valencia, Venezuela</p>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <p class="footer__copy">© 2025 Agromedic C.A. Todos los derechos reservados.</p>
+    <span class="footer__badge"><i class="bi bi-circle-fill" style="font-size:.4rem"></i> Conectado a Kont SaaS</span>
+  </div>
+</footer>
+
+<!-- ── TOAST ───────────────────────────────────────────────── -->
+<div class="toast" id="toast-global" role="alert" aria-live="polite">
+  <i class="bi bi-check-circle-fill toast__icon" id="toast-icono"></i>
+  <span class="toast__texto" id="toast-texto"></span>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/mayoristas.js"></script>
+</body>
+</html>
