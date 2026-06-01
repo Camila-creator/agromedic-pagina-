@@ -1,0 +1,303 @@
+/* ============================================================
+   AGROMEDIC — BASE.CSS
+   Variables globales, reset y tipografía
+   Metodología: Mobile First
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+
+/* ── VARIABLES GLOBALES ── */
+:root {
+  /* Colores principales */
+  --c-bg:          #060C06;
+  --c-bg-2:        #0C160C;
+  --c-surface:     #121A12;
+  --c-surface-2:   #192019;
+  --c-border:      rgba(60, 76, 255, 0.08);
+  --c-border-2:    rgba(89, 60, 255, 0.16);
+
+  /* Acento Lima (marca) */
+  --c-lime:        #5d90fd;
+  --c-lime-dim:    #0247a0;
+  --c-lime-glow:   rgba(170, 255, 60, 0.15);
+  --c-lime-pale:   rgba(170, 255, 60, 0.06);
+
+  /* Textos */
+  --c-text:        #DDE8DD;
+  --c-text-muted:  #7a7c92;
+  --c-text-faint:  #3E523E;
+  --c-cream:       #F0EFE6;
+
+  /* Semánticos */
+  --c-danger:      #FF5252;
+  --c-success:     #4CFF8C;
+  --c-warning:     #FFB84C;
+  --c-white:       #FFFFFF;
+
+  /* Tipografía */
+  --font-display:  'Syne', sans-serif;
+  --font-body:     'Plus Jakarta Sans', sans-serif;
+
+  /* Espaciado base (8px grid) */
+  --sp-1: 0.5rem;
+  --sp-2: 1rem;
+  --sp-3: 1.5rem;
+  --sp-4: 2rem;
+  --sp-6: 3rem;
+  --sp-8: 4rem;
+  --sp-12: 6rem;
+  --sp-16: 8rem;
+
+  /* Bordes */
+  --radius-sm:  6px;
+  --radius-md:  12px;
+  --radius-lg:  20px;
+  --radius-xl:  32px;
+  --radius-full: 9999px;
+
+  /* Sombras */
+  --shadow-lime: 0 0 24px rgba(170, 255, 60, 0.18);
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.5);
+  --shadow-lg:   0 16px 64px rgba(0, 0, 0, 0.6);
+
+  /* Transiciones */
+  --ease:     cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:  cubic-bezier(0.4, 0, 1, 1);
+  --t-fast:   180ms;
+  --t-med:    320ms;
+  --t-slow:   520ms;
+
+  /* Layout */
+  --max-w:     1280px;
+  --header-h:  68px;
+}
+
+/* ── RESET ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--c-text);
+  background-color: var(--c-bg);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img, video {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button, input, select, textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+/* ── TIPOGRAFÍA ── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--c-cream);
+}
+
+h1 { font-size: clamp(2.2rem, 8vw, 5rem); }
+h2 { font-size: clamp(1.6rem, 5vw, 3rem); }
+h3 { font-size: clamp(1.2rem, 3.5vw, 1.75rem); }
+h4 { font-size: clamp(1rem, 2.5vw, 1.25rem); }
+
+p { line-height: 1.7; }
+
+.text-lime     { color: var(--c-lime); }
+.text-muted    { color: var(--c-text-muted); }
+.text-cream    { color: var(--c-cream); }
+.text-center   { text-align: center; }
+.text-sm       { font-size: 0.875rem; }
+.text-xs       { font-size: 0.75rem; }
+.font-display  { font-family: var(--font-display); }
+.font-bold     { font-weight: 700; }
+
+/* ── UTILIDADES ── */
+.contenedor {
+  width: 100%;
+  max-width: var(--max-w);
+  margin-inline: auto;
+  padding-inline: var(--sp-3);
+}
+
+@media (min-width: 768px) {
+  .contenedor { padding-inline: var(--sp-4); }
+}
+
+@media (min-width: 1200px) {
+  .contenedor { padding-inline: var(--sp-6); }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--c-border);
+  margin-block: var(--sp-4);
+}
+
+/* ── GRANO (textura de fondo) ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar        { width: 6px; }
+::-webkit-scrollbar-track  { background: var(--c-bg); }
+::-webkit-scrollbar-thumb  { background: var(--c-border-2); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--c-lime-dim); }
+
+/* ── SELECCIÓN ── */
+::selection {
+  background: var(--c-lime);
+  color: var(--c-bg);
+}
+
+
+/* ============================================================
+   HERO COMPONENT
+   ============================================================ */
+
+/* 1. Mobile First: Diseño apilado para celulares */
+.hero__content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column; /* Coloca la imagen debajo del texto en móviles */
+  gap: var(--sp-6);       /* Usa tu variable de espaciado */
+  padding-block: var(--sp-6);
+}
+
+.hero__info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;    /* Centra el contenido en móviles */
+  text-align: center;
+}
+
+/* Contenedor de la imagen */
+.hero__visual {
+  width: 80%;
+  max-width: 300px; /* Limitamos el ancho en celulares */
+  margin-inline: auto; /* La centramos si el texto está centrado */
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--c-border);
+}
+
+.hero__img {
+  width: 80%;
+  height: 60%;
+  aspect-ratio: 1 / 1; /* La hacemos cuadrada en móvil para que ocupe menos espacio */
+  object-fit: cover;
+  display: block;
+}
+/* (Opcional) Ajuste para las estadísticas en móvil */
+.hero__stats {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--sp-3);
+  margin-top: var(--sp-4);
+}
+
+
+/* ============================================================
+   MEDIA QUERIES (AQUÍ ES DONDE CONTROLAMOS LA COMPUTADORA)
+   ============================================================ */
+@media (min-width: 992px) {
+  
+  .hero__content {
+    flex-direction: row;        
+    align-items: center;        
+    justify-content: space-between;
+  }
+
+  .hero__info {
+    flex: 1; /* El texto toma todo el espacio que sobra */
+    align-items: flex-start;    
+    text-align: left;
+    padding-right: var(--sp-6); 
+  }
+
+  /* AQUÍ ESTÁ EL TRUCO PARA HACERLA CHIQUITA */
+  .hero__visual {
+    flex: 0 0 auto; /* Esto le prohíbe a Flexbox estirar la caja */
+    width: 400px;   /* Aquí le das el tamaño fijo pequeñito que quieres */
+    height: 350px;  /* Le damos una altura fija para que quede como un retrato elegante */
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--c-border);
+  }
+
+  .hero__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Evita que la imagen se deforme, solo recorta lo que sobra */
+    display: block;
+  }
+
+  .hero__stats {
+    grid-template-columns: repeat(4, 1fr); 
+    margin-top: var(--sp-6);
+  }
+}
+
+/* Para pantallas aún más grandes (Desktop Wide) */
+@media (min-width: 1200px) {
+  .hero__content {
+    padding-block: var(--sp-12);
+  }
+}
