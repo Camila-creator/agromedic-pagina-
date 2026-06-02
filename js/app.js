@@ -649,6 +649,68 @@ function agregarAlCarrito(producto, cantidad = 1) {
 
 
 // ─────────────────────────────────────────────────────────────────────────────
+// RENDERIZADO Y CONTROL DEL CARRITO (carrito.html)
+// ─────────────────────────────────────────────────────────────────────────────
+function renderListaCarrito() {
+  const listaContenedor = $('#carrito-lista');
+  const subtotalEl = $('#subtotal-carrito');
+  const totalEl = $('#total-carrito');
+  
+  if (!listaContenedor) return;
+
+  if (STATE.carrito.length === 0) {
+    listaContenedor.innerHTML = `<p class="carrito-vacio">Tu carrito está vacío.</p>`;
+    if (subtotalEl) subtotalEl.textContent = fmt(0);
+    if (totalEl) totalEl.textContent = fmt(0);
+    return;
+  }
+
+  listaContenedor.innerHTML = STATE.carrito.map(item => `
+    <div class="carrito-item" data-id="${item.id}">
+      <img src="${item.imagen || 'img/placeholder.png'}" alt="${safeHtml(item.nombre)}" class="carrito-item__img">
+      <div class="carrito-item__info">
+        <h4 class="carrito-item__nombre">${safeHtml(item.nombre)}</h4>
+        <p class="carrito-item__precio">${fmt(item.precio)}</p>
+      </div>
+      <div class="carrito-item__acciones">
+        <button type="button" class="btn-qty minus" onclick="cambiarCantidadLocal(${item.id}, -1)">-</button>
+        <span class="carrito-item__cant">${item.cantidad}</span>
+        <button type="button" class="btn-qty plus" onclick="cambiarCantidadLocal(${item.id}, 1)">+</button>
+        <button type="button" class="btn-eliminar" onclick="eliminarDelCarritoLocal(${item.id})">
+          <i class="bi bi-trash"></i>
+        </button>
+      </div>
+    </div>
+  `).join('');
+
+  const total = getTotalCarrito();
+  if (subtotalEl) subtotalEl.textContent = fmt(total);
+  if (totalEl) totalEl.textContent = fmt(total);
+}
+
+window.cambiarCantidadLocal = function(id, cambio) {
+  const item = STATE.carrito.find(i => i.id === id);
+  if (!item) return;
+
+  item.cantidad += cambio;
+  
+  if (item.cantidad <= 0) {
+    STATE.carrito = STATE.carrito.filter(i => i.id !== id);
+  }
+
+  guardarCarrito();
+  actualizarContadorCarrito();
+  renderListaCarrito();
+};
+
+window.eliminarDelCarritoLocal = function(id) {
+  STATE.carrito = STATE.carrito.filter(i => i.id !== id);
+  guardarCarrito();
+  actualizarContadorCarrito();
+  renderListaCarrito();
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
 // TOAST
 // ─────────────────────────────────────────────────────────────────────────────
 function showToast(msg, tipo = 'info') {
@@ -731,25 +793,30 @@ function initGeoSelects() {
 // ─────────────────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', async () => {
 
-  // --- AGREGA ESTA LÍNEA AQUÍ ---
+  // 1. Inicializaciones de UI (¡Faltaban header, drawer y scroll!)
   initThemeToggle();
+  initHeader();
+  initDrawer();
+  initScrollAnimations();
   animarContadores();
 
+  // 2. Carrito y Ubicación
   actualizarContadorCarrito();
   initGeoSelects();
 
-  // Cargar métodos de pago de la API y renderizar formulario dinámico
+  // 3. Cargar métodos de pago de la API
   if ($('#pago-metodos-container') || $('#pago-metodos-btns')) {
     const metodos = await cargarMetodosPago();
     if (metodos?.length) renderMetodosPago(metodos);
   }
 
-  // Inicializar checkout si estamos en carrito.html
+  // 4. Inicializar checkout y RENDERIZAR LA LISTA (¡Faltaba renderListaCarrito!)
   if ($('#checkout-form')) {
+    renderListaCarrito(); 
     initCheckoutForm();
   }
 
-  // Cargar catálogo si estamos en tienda.html o index.html
+  // 5. Cargar catálogo si estamos en tienda.html o index.html
   if ($('#catalogo-grid') || $('[data-catalogo]')) {
     await cargarProductos();
   }
@@ -764,4 +831,5 @@ window.agregarAlCarrito    = agregarAlCarrito;
 window.actualizarContadorCarrito = actualizarContadorCarrito;
 window.cargarProductos     = cargarProductos;
 window.DEMO_CATALOG        = DEMO_CATALOG;
-window.cargarMetodosPago   = cargarMetodosPago;
+window.cargarMetodosPago   = cargarMetodosPago; 
+window.renderListaCarrito  = renderListaCarrito; // ← ¡Esta faltaba!
