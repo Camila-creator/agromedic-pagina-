@@ -51,12 +51,12 @@ const KontAPI = (() => {
   // Obtener catálogo con filtros opcionales
   async function getCatalog(params = {}) {
     const qs = new URLSearchParams(params).toString();
-    return request(`${BASE}/productos${qs ? '?' + qs : ''}`, { headers: HEADS });
+    return request(`${BASE}/catalogo${qs ? '?' + qs : ''}`, { headers: HEADS });
   }
 
   // Obtener detalle de un producto
   async function getProduct(id) {
-    return request(`${BASE}/productos/${encodeURIComponent(id)}`, { headers: HEADS });
+    return request(`${BASE}/catalogo/${encodeURIComponent(id)}`, { headers: HEADS });
   }
 
   // Obtener métodos de pago activos
