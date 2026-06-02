@@ -51,7 +51,7 @@
       position: sticky;
       top: var(--header-h);
       z-index: 100;
-      background: rgba(6,12,6,.9);
+      background: var(--c-bg-2);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--c-border);
@@ -99,21 +99,20 @@
     </nav>
 
     <div class="header__acciones">
-      <div class="api-status" style="margin-right:.5rem">
-        <span class="api-status__dot" id="api-status-dot"></span>
-        <span id="api-status-txt">Cargando...</span>
-      </div>
-      <a href="carrito.html" class="btn-carrito" aria-label="Ver carrito">
-        <i class="bi bi-basket3"></i>
-        <span class="contador-carrito" id="contador-carrito">0</span>
-      </a>
-      <button class="btn-menu" id="btn-menu" aria-label="Menú" aria-expanded="false">
-        <span class="btn-menu__line"></span>
-        <span class="btn-menu__line"></span>
-        <span class="btn-menu__line"></span>
-      </button>
-    </div>
-  </div>
+  <button class="btn-theme-toggle" id="btn-theme-toggle" aria-label="Cambiar tema oscuro/claro">
+    <i class="bi bi-moon-fill" id="theme-icon"></i>
+  </button>
+
+  <a href="carrito.html" class="btn-carrito" aria-label="Ver carrito">
+    <i class="bi bi-basket3"></i>
+    <span class="contador-carrito" id="contador-carrito">0</span>
+  </a>
+  <button class="btn-menu" id="btn-menu" aria-label="Menú" aria-expanded="false">
+    <span class="btn-menu__line"></span>
+    <span class="btn-menu__line"></span>
+    <span class="btn-menu__line"></span>
+  </button>
+</div>
 </header>
 
 <!-- ── DRAWER MOBILE ──────────────────────────────────────── -->
@@ -222,7 +221,7 @@
 <footer class="footer">
   <div class="contenedor footer__grid">
     <div>
-      <div class="footer__logo">AGRO<span style="color:var(--c-cream)">MEDIC</span></div>
+      <div class="footer__logo">AGRO<span>MEDIC</span></div>
       <p class="footer__desc">Salud animal con ciencia y naturaleza.</p>
       <div class="footer__social">
         <a href="#" class="footer__social-link" aria-label="Instagram"><i class="bi bi-instagram"></i></a>

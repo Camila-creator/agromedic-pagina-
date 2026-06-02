@@ -48,7 +48,7 @@
 
 /* ── LINKS A OTRAS HERRAMIENTAS ─────────────────────────── */
 .herr-nav {
-  background: var(--c-surface);
+  background: var(--c-bg-2);
   border-bottom: 1px solid var(--c-border);
   padding-block: .6rem;
   overflow-x: auto;
@@ -87,7 +87,7 @@
 }
 
 .herr-nav__link.activo {
-  color: var(--c-lime);
+  color: var(--c-lime-dim);
   background: var(--c-lime-pale);
   border-color: var(--c-border-2);
 }

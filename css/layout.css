@@ -22,7 +22,6 @@
 }
 
 .header.scrolled {
-  background: rgba(6, 12, 6, 0.88);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-color: var(--c-border);
@@ -50,7 +49,7 @@
 }
 
 .header__logo span {
-  color: var(--c-cream);
+  color: var(--c-text);
 }
 
 .header__logo-dot {
@@ -77,7 +76,7 @@
 .nav__link {
   font-size: 0.9rem;
   font-weight: 500;
-  color: var(--c-text-muted);
+  color: var(--c-text);
   padding: 0.5rem 0.75rem;
   border-radius: var(--radius-sm);
   transition: color var(--t-fast), background var(--t-fast);
@@ -85,8 +84,8 @@
 
 .nav__link:hover,
 .nav__link.activo {
-  color: var(--c-cream);
-  background: var(--c-lime-pale);
+  color: var(--c-white);
+  background: var(--c-lime-glow);
 }
 
 /* Acciones header */
@@ -233,14 +232,14 @@
   font-family: var(--font-display);
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--c-text-muted);
+  color: var(--c-text);
   padding: 0.75rem 0;
   border-bottom: 1px solid var(--c-border);
   transition: color var(--t-fast);
 }
 
 .nav-drawer__link:hover,
-.nav-drawer__link.activo { color: var(--c-lime); }
+.nav-drawer__link.activo { color: var(--c-lime-dim); }
 
 .nav-drawer__footer {
   margin-top: auto;
@@ -375,6 +374,12 @@ main {
   margin-bottom: var(--sp-2);
 }
 
+.footer__logo span{
+color:var(--c-text)
+}
+
+
+
 .footer__desc {
   font-size: 0.9rem;
   color: var(--c-text-muted);
@@ -475,3 +480,4 @@ main {
 }
 
 .footer__badge i { color: var(--c-lime); }
+

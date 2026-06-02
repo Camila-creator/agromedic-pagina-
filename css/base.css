@@ -6,9 +6,75 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
 
-/* ── VARIABLES GLOBALES ── */
+/* ── VARIABLES GLOBALES (LIGHT MODE POR DEFECTO & MOBILE-FIRST) ── */
 :root {
-  /* Colores principales */
+  /* Colores principales (Light) */
+  --c-bg:          #FFFFFF;
+  --c-bg-2:        #F8F9FA;
+  --c-surface:     #FFFFFF;
+  --c-surface-2:   #F3F4F6;
+  --c-border:      rgba(0, 0, 0, 0.08);
+  --c-border-2:    rgba(0, 0, 0, 0.16);
+
+  /* Acento Lima (ajustado para contraste en Light Mode) */
+  --c-lime:        #2563EB;
+  --c-lime-dim:    #1E40AF;
+  --c-lime-glow:   rgba(37, 99, 235, 0.15);
+  --c-lime-pale:   rgba(37, 99, 235, 0.06);
+
+  /* Textos (Light) */
+  --c-text:        #111827;
+  --c-text-muted:  #4B5563;
+  --c-text-faint:  #9CA3AF;
+  --c-cream:       #F9FAFB;
+
+  /* Semánticos (Ajustados para accesibilidad en claro) */
+  --c-danger:      #DC2626;
+  --c-success:     #16A34A;
+  --c-warning:     #D97706;
+  --c-white:       #FFFFFF;
+
+  /* Tipografía (Estática en ambos temas) */
+  --font-display:  'Syne', sans-serif;
+  --font-body:     'Plus Jakarta Sans', sans-serif;
+
+  /* Espaciado base Mobile-First (8px grid reducido para móviles) */
+  --sp-1: 0.5rem;
+  --sp-2: 1rem;
+  --sp-3: 1.5rem;
+  --sp-4: 2rem;
+  --sp-6: 2.5rem; 
+  --sp-8: 3rem;   
+  --sp-12: 4rem;  
+  --sp-16: 5rem;  
+
+  /* Bordes (Estáticos) */
+  --radius-sm:  6px;
+  --radius-md:  12px;
+  --radius-lg:  20px;
+  --radius-xl:  32px;
+  --radius-full: 9999px;
+
+  /* Sombras (Suaves para Light Mode) */
+  --shadow-lime: 0 0 24px rgba(37, 99, 235, 0.18);
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.05);
+  --shadow-lg:   0 12px 40px rgba(0, 0, 0, 0.08);
+
+  /* Transiciones (Estáticas) */
+  --ease:     cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:  cubic-bezier(0.4, 0, 1, 1);
+  --t-fast:   180ms;
+  --t-med:    320ms;
+  --t-slow:   520ms;
+
+  /* Layout Mobile-First */
+  --max-w:     100%;
+  --header-h:  60px;
+}
+
+/* ── OVERRIDES PARA DARK MODE ── */
+[data-theme="dark"] {
+  /* Colores principales originales */
   --c-bg:          #060C06;
   --c-bg-2:        #0C160C;
   --c-surface:     #121A12;
@@ -16,60 +82,43 @@
   --c-border:      rgba(60, 76, 255, 0.08);
   --c-border-2:    rgba(89, 60, 255, 0.16);
 
-  /* Acento Lima (marca) */
+  /* Acento Lima original */
   --c-lime:        #5d90fd;
   --c-lime-dim:    #0247a0;
-  --c-lime-glow:   rgba(170, 255, 60, 0.15);
-  --c-lime-pale:   rgba(170, 255, 60, 0.06);
+  --c-lime-glow:   rgba(60, 96, 255, 0.15); 
+  --c-lime-pale:   rgba(60, 157, 255, 0.142);
 
-  /* Textos */
+  /* Textos originales */
   --c-text:        #DDE8DD;
   --c-text-muted:  #7a7c92;
   --c-text-faint:  #3E523E;
   --c-cream:       #F0EFE6;
 
-  /* Semánticos */
+  /* Semánticos originales */
   --c-danger:      #FF5252;
   --c-success:     #4CFF8C;
   --c-warning:     #FFB84C;
   --c-white:       #FFFFFF;
 
-  /* Tipografía */
-  --font-display:  'Syne', sans-serif;
-  --font-body:     'Plus Jakarta Sans', sans-serif;
-
-  /* Espaciado base (8px grid) */
-  --sp-1: 0.5rem;
-  --sp-2: 1rem;
-  --sp-3: 1.5rem;
-  --sp-4: 2rem;
-  --sp-6: 3rem;
-  --sp-8: 4rem;
-  --sp-12: 6rem;
-  --sp-16: 8rem;
-
-  /* Bordes */
-  --radius-sm:  6px;
-  --radius-md:  12px;
-  --radius-lg:  20px;
-  --radius-xl:  32px;
-  --radius-full: 9999px;
-
-  /* Sombras */
+  /* Sombras originales para fondo oscuro */
   --shadow-lime: 0 0 24px rgba(170, 255, 60, 0.18);
   --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.5);
   --shadow-lg:   0 16px 64px rgba(0, 0, 0, 0.6);
+}
 
-  /* Transiciones */
-  --ease:     cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-in:  cubic-bezier(0.4, 0, 1, 1);
-  --t-fast:   180ms;
-  --t-med:    320ms;
-  --t-slow:   520ms;
+/* ── MEDIA QUERIES (DESKTOP) ── */
+@media (min-width: 768px) {
+  :root {
+    /* Restaurar espaciados grandes para escritorio */
+    --sp-6:  3rem;
+    --sp-8:  4rem;
+    --sp-12: 6rem;
+    --sp-16: 8rem;
 
-  /* Layout */
-  --max-w:     1280px;
-  --header-h:  68px;
+    /* Restaurar layout de escritorio */
+    --max-w:     1280px;
+    --header-h:  68px;
+  }
 }
 
 /* ── RESET ── */
@@ -127,7 +176,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   line-height: 1.15;
   letter-spacing: -0.02em;
-  color: var(--c-cream);
+  color: var(--c-text);
 }
 
 h1 { font-size: clamp(2.2rem, 8vw, 5rem); }
