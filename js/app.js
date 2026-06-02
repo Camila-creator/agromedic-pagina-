@@ -157,6 +157,47 @@ const DEMO_PAYMENT_METHODS = [
   },
 ];
 
+// ─────────────────────────────────────────────────────────────────────────────
+// RENDERIZAR CATÁLOGO DE PRODUCTOS (Inyecta el HTML en la tienda)
+// ─────────────────────────────────────────────────────────────────────────────
+function renderCatalogo(productos) {
+  const grid = $('#catalogo-grid');
+  if (!grid) return;
+
+  // Si no hay productos, mostramos un mensaje
+  if (!productos || productos.length === 0) {
+    grid.innerHTML = '<div class="catalogo-vacio"><p>No hay productos disponibles en este momento.</p></div>';
+    return;
+  }
+
+  // Generamos el HTML para cada tarjeta (preparado para tu CSS Mobile-First)
+  grid.innerHTML = productos.map(prod => `
+    <article class="tarjeta-producto" data-id="${prod.id}" data-categoria="${safeHtml(prod.categoria)}">
+      <div class="tarjeta-producto__img-wrap">
+        <img src="${prod.imagen || 'img/placeholder.png'}" alt="${safeHtml(prod.nombre)}" class="tarjeta-producto__img" loading="lazy">
+        ${prod.destacado ? '<span class="tarjeta-producto__badge">Destacado</span>' : ''}
+      </div>
+      <div class="tarjeta-producto__info">
+        <span class="tarjeta-producto__categoria">${safeHtml(prod.categoria).toUpperCase()}</span>
+        <h3 class="tarjeta-producto__nombre">${safeHtml(prod.nombre)}</h3>
+        <p class="tarjeta-producto__precio">${fmt(prod.precio)}</p>
+        
+        <button type="button" class="btn-agregar-carrito" 
+          onclick="agregarAlCarrito({
+            id: ${prod.id}, 
+            nombre: '${safeHtml(prod.nombre.replace(/'/g, "\\'"))}', 
+            precio: ${prod.precio}, 
+            imagen: '${prod.imagen || ''}'
+          }, 1)">
+          <i class="bi bi-cart-plus"></i> Agregar
+        </button>
+      </div>
+    </article>
+  `).join('');
+
+  // Volvemos a disparar el IntersectionObserver para que las tarjetas nuevas tengan su animación
+  initScrollAnimations();
+}
 
 // ─────────────────────────────────────────────────────────────────────────────
 // ESTADO GLOBAL
@@ -819,6 +860,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // 5. Cargar catálogo si estamos en tienda.html o index.html
   if ($('#catalogo-grid') || $('[data-catalogo]')) {
     await cargarProductos();
+    renderCatalogo(STATE.productos); // ← ¡Esta es la línea mágica que faltaba!
   }
 
 });
@@ -827,6 +869,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 window.KontAPI     = KontAPI;
 window.STATE       = STATE;
 window.showToast   = showToast;
+window.renderCatalogo = renderCatalogo;
 window.agregarAlCarrito    = agregarAlCarrito;
 window.actualizarContadorCarrito = actualizarContadorCarrito;
 window.cargarProductos     = cargarProductos;
