@@ -188,7 +188,7 @@ p { line-height: 1.7; }
 
 .text-lime     { color: var(--c-lime); }
 .text-muted    { color: var(--c-text-muted); }
-.text-cream    { color: var(--c-cream); }
+.text-cream    { color: var(--c-text); }
 .text-center   { text-align: center; }
 .text-sm       { font-size: 0.875rem; }
 .text-xs       { font-size: 0.75rem; }
