@@ -734,7 +734,7 @@ a.ctc-card:hover .ctc-card__arrow {
   padding: 1rem 1.1rem;
   background: none;
   border: none;
-  color: var(--c-cream);
+  color: var(--c-text);
   font-family: var(--font-display);
   font-size: .9rem;
   font-weight: 600;
