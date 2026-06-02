@@ -161,7 +161,7 @@ const DEMO_PAYMENT_METHODS = [
 // RENDERIZAR CATÁLOGO DE PRODUCTOS (Inyecta el HTML en la tienda)
 // ─────────────────────────────────────────────────────────────────────────────
 function renderCatalogo(productos) {
-  const grid = $('#catalogo-grid');
+  const grid = $('#catalogo-grid') || $('[data-catalogo]');
   if (!grid) return;
 
   // Si no hay productos, mostramos un mensaje
@@ -196,7 +196,7 @@ function renderCatalogo(productos) {
   `).join('');
 
   // Volvemos a disparar el IntersectionObserver para que las tarjetas nuevas tengan su animación
-  initScrollAnimations();
+  // initScrollAnimations(); // ← Coméntala un segundo, guarda y recarga
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
