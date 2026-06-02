@@ -14,7 +14,7 @@
 const KONT = {
   BASE_URL:     'https://api.kont.app',              // URL base del backend
   SLUG:         'agromedic-3',                          // payment_slug de tu empresa
-  API_KEY:      'ca3d36a0-354b-4671-aca8-16c671fa322c',             // tenants.public_api_key
+  API_KEY:      '1abd0015-e02d-4f97-8b39-91f354c75317',             // tenants.public_api_key
   WS_NUMBER:    '584226396237',                       // WhatsApp fallback
   DEMO_MODE:    false,                                 // ← Cambiar a false en producción
 };[]
