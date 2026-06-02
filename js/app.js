@@ -12,7 +12,7 @@
 // Los obtienes en el panel de Kont: Configuración → Canal Web.
 // ─────────────────────────────────────────────────────────────────────────────
 const KONT = {
-  BASE_URL:     'https://api.kont.app',              // URL base del backend
+  BASE_URL:     'https://api.kont.lat',              // URL base del backend
   SLUG:         'agromedic-3',                          // payment_slug de tu empresa
   API_KEY:      '1abd0015-e02d-4f97-8b39-91f354c75317',  // tenants.public_api_key
   WS_NUMBER:    '584226396237',                       // WhatsApp fallback
