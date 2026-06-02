@@ -196,7 +196,7 @@ function renderCatalogo(productos) {
   `).join('');
 
   // Volvemos a disparar el IntersectionObserver para que las tarjetas nuevas tengan su animación
-  // initScrollAnimations(); // ← Coméntala un segundo, guarda y recarga
+   initScrollAnimations(); 
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
