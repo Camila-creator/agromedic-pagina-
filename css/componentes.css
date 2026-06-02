@@ -1241,7 +1241,7 @@
   color: var(--c-text);
 }
 
-.proceso-paso.activo .proceso-paso__label    { color: var(--c-cream); }
+.proceso-paso.activo .proceso-paso__label    { color: var(--c-lime); }
 .proceso-paso.completado .proceso-paso__label { color: var(--c-text-muted); }
 
 .proceso-linea {
