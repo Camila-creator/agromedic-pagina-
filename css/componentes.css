@@ -1238,7 +1238,7 @@
 .proceso-paso__label {
   font-size: 0.78rem;
   font-weight: 600;
-  color: var(--c-text-faint);
+  color: var(--c-text);
 }
 
 .proceso-paso.activo .proceso-paso__label    { color: var(--c-cream); }
