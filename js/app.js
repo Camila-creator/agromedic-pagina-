@@ -43,10 +43,10 @@ const KontAPI = (() => {
 
 // ─── DEMO DATA ───────────────────────────────────────────────
 const DEMO_CATALOG = [
-  { id: 1, nombre: 'Suplemento Mineral FOS', categoria: 'ganado', precio: 15.50, precio_mayorista: 12.00, imagen: 'img/prueba-agro.png', descripcion: 'Suplemento mineral de alta concentración con FOS para bovinos.', etiquetas: ['ganado','suplemento','destacado'], disponible: true, destacado: true },
+  { id: 1, nombre: 'Suplemento Mineral FOS', categoria: 'ganado', precio: 15.50, precio_mayorista: 12.00, imagen: 'img/prueba-agro.jpg', descripcion: 'Suplemento mineral de alta concentración con FOS para bovinos.', etiquetas: ['ganado','suplemento','destacado'], disponible: true, destacado: true },
   { id: 2, nombre: 'Shampoo Antialergia Pet', categoria: 'mascotas', precio: 8.99, precio_mayorista: 7.00, imagen: 'img/prueba-agro-2.png', descripcion: 'Fórmula dermatológica libre de parabenos para piel sensible.', etiquetas: ['mascotas','higiene'], disponible: true, destacado: false },
-  { id: 3, nombre: 'Ivermectina Forte 3.5%', categoria: 'ganado', precio: 22.00, precio_mayorista: 18.00, imagen: 'img/prueba-agro-3.png', descripcion: 'Antiparasitario de amplio espectro para bovinos, equinos y ovinos.', etiquetas: ['ganado','medicina','destacado'], disponible: true, destacado: true },
-  { id: 4, nombre: 'Antipulgas Plus 4en1', categoria: 'mascotas', precio: 12.00, precio_mayorista: 9.50, imagen: 'img/prueba-agro-4.png', descripcion: 'Elimina pulgas, garrapatas, piojos y ácaros en 24 horas.', etiquetas: ['mascotas','medicina'], disponible: true, destacado: false },
+  { id: 3, nombre: 'Ivermectina Forte 3.5%', categoria: 'ganado', precio: 22.00, precio_mayorista: 18.00, imagen: 'img/prueba-agro-3.jpeg', descripcion: 'Antiparasitario de amplio espectro para bovinos, equinos y ovinos.', etiquetas: ['ganado','medicina','destacado'], disponible: true, destacado: true },
+  { id: 4, nombre: 'Antipulgas Plus 4en1', categoria: 'mascotas', precio: 12.00, precio_mayorista: 9.50, imagen: 'img/prueba-agro-4.webp', descripcion: 'Elimina pulgas, garrapatas, piojos y ácaros en 24 horas.', etiquetas: ['mascotas','medicina'], disponible: true, destacado: false },
 ];
 
 const DEMO_PAYMENT_METHODS = [
