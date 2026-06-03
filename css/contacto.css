@@ -523,7 +523,7 @@ a.ctc-card:hover .ctc-card__arrow {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: .05em;
-  color: var(--c-cream);
+  color: var(--c-text);
   display: flex;
   align-items: center;
   gap: .4rem;
