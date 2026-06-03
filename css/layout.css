@@ -418,7 +418,7 @@ color:var(--c-text)
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--c-cream);
+  color: var(--c-text);
   margin-bottom: var(--sp-2);
 }
 
