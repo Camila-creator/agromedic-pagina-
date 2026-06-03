@@ -246,7 +246,7 @@ a.ctc-card:hover .ctc-card__arrow {
 
 .ctc-form-titulo {
   font-size: clamp(1.2rem, 3vw, 1.75rem);
-  color: var(--c-cream);
+  color: var(--c-text);
   margin-bottom: .4rem;
 }
 
