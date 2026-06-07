@@ -240,7 +240,8 @@ function initBtnCarrito(producto) {
   const carrito = JSON.parse(localStorage.getItem('agro_carrito') || '[]');
   if (carrito.some(i => String(i.id) === String(producto.id))) { btn.innerHTML = '<i class="bi bi-cart-check-fill"></i> <span>En el carrito</span>'; btn.classList.add('en-carrito'); }
   btn.addEventListener('click', () => {
-    const qty = parseInt($('qty-input')?.value) || 1;
+    const qty=parseInt($('qty-input')?.value)||1;
+    if(window.agregarAlCarrito){window.agregarAlCarrito({id:producto.id,nombre:producto.nombre,precio:producto.precio,imagen:producto.imagen||''},qty);btn.innerHTML='<i class="bi bi-cart-check-fill"></i> <span>En el carrito</span>';btn.classList.add('en-carrito');mostrarToast((qty>1?qty+'x ':'')+producto.nombre+' anadido','success');return;}
     const carritoActual = JSON.parse(localStorage.getItem('agro_carrito') || '[]');
     const existente = carritoActual.find(i => String(i.id) === String(producto.id));
     if (existente) existente.cantidad = Math.min(existente.cantidad + qty, 99);

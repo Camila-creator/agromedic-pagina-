@@ -11,12 +11,7 @@
 /* ══════════════════════════════════════════════════════════
    CONFIG GLOBAL
 ══════════════════════════════════════════════════════════ */
-var KONT = {
-  BASE_URL:  'https://api.kont.app/v1',
-  TENANT_ID: 'TU_TENANT_ID',
-  API_KEY:   'TU_API_KEY_PUBLICA',
-  WS_NUMBER: '584226396237'
-};
+var KONT=window.KONT||{BASE_URL:'https://api.kont.lat',SLUG:'agromedic-3',API_KEY:'1abd0015-e02d-4f97-8b39-91f354c75317',WS_NUMBER:'584226396237',DEMO_MODE:false};
 
 var safeText = function(v){ return (v || '').toString().trim(); };
 var fmt = function(n){ return '$' + Number(n).toFixed(2); };
@@ -542,7 +537,7 @@ function getEstadoIndex(key) {
 
 async function buscarPedidoEnAPI(id) {
   try {
-    var res = await fetch(KONT.BASE_URL + '/orders/' + encodeURIComponent(id) + '?tenant_id=' + KONT.TENANT_ID, {
+    var res = await fetch(KONT.BASE_URL+'/api/ecommerce/'+(KONT.SLUG||'agromedic-3')+'/pedidos/'+encodeURIComponent(id), {
       headers: { 'Authorization': 'Bearer ' + KONT.API_KEY },
       signal: AbortSignal.timeout(6000)
     });
@@ -861,7 +856,9 @@ function renderComparador() {
           cantidad: 1
         });
       }
-      localStorage.setItem('agro_carrito', JSON.stringify(carrito));
+      if(window.STATE&&window.STATE.carrito)window.STATE.carrito=carrito;
+      localStorage.setItem('agro_carrito',JSON.stringify(carrito));
+      if(window.actualizarContadorCarrito)window.actualizarContadorCarrito();
       var total = carrito.reduce(function(s,i){ return s+i.cantidad; }, 0);
       document.querySelectorAll('.contador-carrito').forEach(function(el){ el.textContent = total; });
       btn.innerHTML = '<i class="bi bi-cart-check-fill"></i> Añadido';

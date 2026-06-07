@@ -81,7 +81,7 @@ function actualizarContadorCarrito() {
 
 function agregarAlCarrito(producto, cantidad) {
   cantidad = cantidad || 1;
-  const ex = STATE.carrito.find(i => i.id === producto.id);
+  const ex = STATE.carrito.find(i => String(i.id)===String(producto.id));
   if (ex) ex.cantidad = Math.min(ex.cantidad + cantidad, 99);
   else STATE.carrito.push({ id: producto.id, nombre: producto.nombre, precio: producto.precio, imagen: producto.imagen || '', cantidad: cantidad });
   guardarCarrito();
@@ -90,6 +90,7 @@ function agregarAlCarrito(producto, cantidad) {
 }
 
 function renderListaCarrito() {
+  var _f=document.getElementById("checkout-form");if(_f)_f.style.display=STATE.carrito.length>0?"block":"none";
   const lista  = document.getElementById('carrito-lista');
   const subEl  = document.getElementById('subtotal-carrito');
   const totEl  = document.getElementById('total-carrito');
@@ -118,14 +119,14 @@ function renderListaCarrito() {
 }
 
 window.cambiarCantidadLocal = function(id, delta) {
-  const item = STATE.carrito.find(i => i.id === id);
+  const item = STATE.carrito.find(i => String(i.id)===String(id));
   if (!item) return;
   item.cantidad += delta;
-  if (item.cantidad <= 0) STATE.carrito = STATE.carrito.filter(i => i.id !== id);
+  if (item.cantidad <= 0) STATE.carrito = STATE.carrito.filter(i => String(i.id)!==String(id));
   guardarCarrito(); actualizarContadorCarrito(); renderListaCarrito();
 };
 window.eliminarDelCarritoLocal = function(id) {
-  STATE.carrito = STATE.carrito.filter(i => i.id !== id);
+  STATE.carrito = STATE.carrito.filter(i => String(i.id)!==String(id));
   guardarCarrito(); actualizarContadorCarrito(); renderListaCarrito();
 };
 
@@ -449,7 +450,9 @@ document.addEventListener('DOMContentLoaded', async function() {
     initCheckoutForm();
   }
 
-  if (document.getElementById('catalogo-grid') || document.querySelector('[data-catalogo]')) {
+  var dg=document.getElementById('productos-destacados-grid');if(dg){var rd=await cargarProductos();var ds=(rd.data||[]).filter(function(p){return p.destacado===true;});if(!ds.length)ds=(rd.data||[]).slice(0,4);renderCatalogo(ds,'productos-destacados-grid');}
+
+    if (document.getElementById('catalogo-grid') || document.querySelector('[data-catalogo]')) {
     await cargarProductos();
     renderCatalogo(STATE.productos);
   }

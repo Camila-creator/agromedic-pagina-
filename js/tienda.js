@@ -9,6 +9,12 @@
 'use strict';
 
 (async function initTienda() {
+  var COMP_KEY='agro_comparador',MAX_COMP=3;
+  function getComp(){try{return JSON.parse(localStorage.getItem(COMP_KEY)||'[]');}catch(e){return[];}}
+  function setComp(l){localStorage.setItem(COMP_KEY,JSON.stringify(l));updateCompBadge();}
+  function updateCompBadge(){var n=getComp().length;document.querySelectorAll('.comparador-badge').forEach(function(b){b.textContent=n;b.style.display=n>0?'flex':'none';});}
+  function addToComp(p){var l=getComp();if(l.find(function(x){return String(x.id)===String(p.id);})){if(window.showToast)showToast(p.nombre+' ya esta','info');return;}if(l.length>=MAX_COMP){if(window.showToast)showToast('Max '+MAX_COMP+' en comparador','error');return;}l.push(p);setComp(l);if(window.showToast)showToast(p.nombre+' al comparador','success');}
+
 
   const grid         = document.getElementById('productos-grid');
   const countEl      = document.getElementById('resultados-count');
@@ -59,6 +65,7 @@
           <a href="productos.html?id=${encodeURIComponent(p.id)}" class="btn btn-secondary btn-sm">
             <i class="bi bi-eye"></i> Ver
           </a>
+          <button class="btn btn-ghost btn-sm btn-comparar" title="Comparar"><i class="bi bi-bar-chart-steps"></i></button>
           <button
             class="btn btn-primary btn-sm btn-agregar-carrito"
             data-id="${p.id}"
