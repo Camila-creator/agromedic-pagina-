@@ -149,51 +149,91 @@ async function cargarProductos(params) {
   }
 }
 
-// Añadimos 'containerId' como segundo parámetro opcional
 function renderCatalogo(productos, containerId) {
-  // Ahora busca el ID que le pases, o usa 'catalogo-grid' por defecto
+  // Busca el contenedor específico (ej. productos-destacados-grid en el index) o usa el del catálogo por defecto
   const targetId = containerId || 'catalogo-grid';
   const grid = document.getElementById(targetId) || document.querySelector('[data-catalogo]');
   
   if (!grid) return;
   
+  // Estado vacío estructurado con tus clases
   if (!productos || productos.length === 0) {
-    grid.innerHTML = '<div class="catalogo-vacio"><p>No hay productos disponibles.</p></div>';
+    grid.innerHTML = `
+      <div class="productos-vacio">
+        <i class="bi bi-inbox productos-vacio__icono"></i>
+        <h3 class="productos-vacio__titulo">No hay productos</h3>
+        <p class="productos-vacio__desc">No encontramos resultados para mostrar en esta sección.</p>
+      </div>`;
     return;
   }
   
   grid.innerHTML = '';
+  
   productos.forEach(function(prod) {
     const art = document.createElement('article');
-    art.className = 'tarjeta-producto';
+    art.className = 'tarjeta-producto animada';
     art.dataset.id = prod.id;
     art.dataset.categoria = (prod.categoria || '').toLowerCase();
+    
     const imgSrc = prod.imagen || 'img/placeholder.png';
-    art.innerHTML =
-      '<div class="tarjeta-producto__img-wrap">' +
-        '<img src="' + safeHtml(imgSrc) + '" alt="' + safeHtml(prod.nombre) + '" class="tarjeta-producto__img" loading="lazy">' +
-        (prod.destacado ? '<span class="tarjeta-producto__badge">Destacado</span>' : '') +
-      '</div>' +
-      '<div class="tarjeta-producto__info">' +
-        '<span class="tarjeta-producto__categoria">' + safeHtml((prod.categoria || '').toUpperCase()) + '</span>' +
-        '<h3 class="tarjeta-producto__nombre">' + safeHtml(prod.nombre) + '</h3>' +
-        '<p class="tarjeta-producto__precio">' + fmt(prod.precio) + '</p>' +
-        '<button type="button" class="btn-agregar-carrito"><i class="bi bi-cart-plus"></i> Agregar</button>' +
-      '</div>';
-      
+    
+    // Armar los badges dinámicamente
+    let badgesHtml = '';
+    if (prod.destacado) {
+      badgesHtml += '<span class="badge badge-destacado"><i class="bi bi-star-fill"></i> Destacado</span>';
+    }
+    
+    // Inyectamos el HTML usando EXACTAMENTE las clases de tu nuevo CSS
+    art.innerHTML = `
+      <div class="tarjeta__img-wrap">
+        <img src="${safeHtml(imgSrc)}" alt="${safeHtml(prod.nombre)}" loading="lazy">
+        <div class="tarjeta__badges">
+          ${badgesHtml}
+        </div>
+      </div>
+      <div class="tarjeta__body">
+        <div style="margin-bottom: 4px;">
+          <span class="badge badge-categoria">${safeHtml((prod.categoria || '').toUpperCase())}</span>
+        </div>
+        <h3 class="tarjeta__nombre">${safeHtml(prod.nombre)}</h3>
+        <p class="tarjeta__desc">${safeHtml(prod.descripcion || 'Producto certificado para el cuidado animal.')}</p>
+        <div class="tarjeta__precio">${fmt(prod.precio)}</div>
+        <div class="tarjeta__footer">
+          <button type="button" class="btn btn-primary btn-agregar-carrito">
+            <i class="bi bi-cart-plus"></i> Agregar
+          </button>
+          <button type="button" class="btn btn-secondary btn-ver-detalle">
+            <i class="bi bi-eye"></i> <span class="btn-label">Ver</span>
+          </button>
+        </div>
+      </div>
+    `;
+    
+    // Lógica del botón de carrito
     const btn = art.querySelector('.btn-agregar-carrito');
     if (prod.disponible === false) {
-      btn.disabled = true; btn.textContent = 'Agotado';
+      btn.disabled = true; 
+      btn.innerHTML = '<i class="bi bi-x-circle"></i> Agotado';
+      btn.style.background = 'var(--c-surface-2)';
+      btn.style.color = 'var(--c-text-muted)';
+      btn.style.borderColor = 'var(--c-border)';
     } else {
       btn.addEventListener('click', function() {
         agregarAlCarrito({ id: prod.id, nombre: prod.nombre, precio: prod.precio, imagen: imgSrc });
         btn.innerHTML = '<i class="bi bi-cart-check-fill"></i> Añadido';
-        setTimeout(function() { btn.innerHTML = '<i class="bi bi-cart-plus"></i> Agregar'; }, 2000);
+        btn.classList.add('en-carrito');
+        setTimeout(function() { 
+          btn.innerHTML = '<i class="bi bi-cart-plus"></i> Agregar'; 
+          btn.classList.remove('en-carrito');
+        }, 2000);
       });
     }
+    
     grid.appendChild(art);
   });
-  initScrollAnimations();
+  
+  // Disparar las animaciones de scroll si existen
+  if(typeof initScrollAnimations === 'function') initScrollAnimations();
 }
 
 // === MÉTODOS DE PAGO ===============================================
