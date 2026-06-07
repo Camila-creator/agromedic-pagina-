@@ -149,13 +149,19 @@ async function cargarProductos(params) {
   }
 }
 
-function renderCatalogo(productos) {
-  const grid = document.getElementById('catalogo-grid') || document.querySelector('[data-catalogo]');
+// Añadimos 'containerId' como segundo parámetro opcional
+function renderCatalogo(productos, containerId) {
+  // Ahora busca el ID que le pases, o usa 'catalogo-grid' por defecto
+  const targetId = containerId || 'catalogo-grid';
+  const grid = document.getElementById(targetId) || document.querySelector('[data-catalogo]');
+  
   if (!grid) return;
+  
   if (!productos || productos.length === 0) {
     grid.innerHTML = '<div class="catalogo-vacio"><p>No hay productos disponibles.</p></div>';
     return;
   }
+  
   grid.innerHTML = '';
   productos.forEach(function(prod) {
     const art = document.createElement('article');
@@ -174,13 +180,14 @@ function renderCatalogo(productos) {
         '<p class="tarjeta-producto__precio">' + fmt(prod.precio) + '</p>' +
         '<button type="button" class="btn-agregar-carrito"><i class="bi bi-cart-plus"></i> Agregar</button>' +
       '</div>';
+      
     const btn = art.querySelector('.btn-agregar-carrito');
     if (prod.disponible === false) {
       btn.disabled = true; btn.textContent = 'Agotado';
     } else {
       btn.addEventListener('click', function() {
         agregarAlCarrito({ id: prod.id, nombre: prod.nombre, precio: prod.precio, imagen: imgSrc });
-        btn.innerHTML = '<i class="bi bi-cart-check-fill"></i> Anadido';
+        btn.innerHTML = '<i class="bi bi-cart-check-fill"></i> Añadido';
         setTimeout(function() { btn.innerHTML = '<i class="bi bi-cart-plus"></i> Agregar'; }, 2000);
       });
     }
