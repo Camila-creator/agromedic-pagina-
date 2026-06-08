@@ -45,7 +45,7 @@
 .prod-breadcrumb__current {
   font-size: .78rem;
   font-weight: 600;
-  color: var(--c-text);
+  color: var(--c-cream);
   display: inline-block;
   max-width: 200px;
   overflow: hidden;
@@ -438,7 +438,7 @@
   background: transparent;
   border: none;
   border-inline: 1px solid var(--c-border);
-  color: var(--c-text);
+  color: var(--c-cream);
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 1rem;
@@ -595,7 +595,7 @@
 }
 
 .prod-tab-content p { margin-bottom: 1rem; }
-.prod-tab-content strong { color: var(--c-text); }
+.prod-tab-content strong { color: var(--c-cream); }
 
 /* Tabla de especificaciones */
 .prod-specs-table {
@@ -624,7 +624,7 @@
 }
 
 .prod-specs-table td {
-  color: var(--c-text);
+  color: var(--c-cream);
 }
 
 @media (min-width: 768px) {

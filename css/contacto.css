@@ -385,7 +385,7 @@ a.ctc-card:hover .ctc-card__arrow {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: var(--c-text);
+  color: var(--c-cream);
   font-weight: 500;
 }
 
@@ -484,7 +484,7 @@ a.ctc-card:hover .ctc-card__arrow {
 
 .ctc-confirmacion h3 {
   font-size: 1.5rem;
-  color: var(--c-text);
+  color: var(--c-cream);
 }
 
 .ctc-confirmacion p {
@@ -628,7 +628,7 @@ a.ctc-card:hover .ctc-card__arrow {
 
 .ctc-hora {
   text-align: right;
-  color: var(--c-text);
+  color: var(--c-cream);
   font-weight: 600;
   white-space: nowrap;
 }
@@ -673,7 +673,7 @@ a.ctc-card:hover .ctc-card__arrow {
 
 .ctc-rrss-btn:hover {
   border-color: var(--c-border-2);
-  color: var(--c-text);
+  color: var(--c-cream);
   background: var(--c-surface-2);
 }
 
