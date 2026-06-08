@@ -527,7 +527,7 @@
 
 .prod-error__titulo {
   font-size: 1.5rem;
-  color: var(--c-cream);
+  color: var(--c-text);
 }
 
 .prod-error__desc {
