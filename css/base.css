@@ -26,7 +26,7 @@
   --c-text:        #111827;
   --c-text-muted:  #4B5563;
   --c-text-faint:  #9CA3AF;
-  --c-cream:       #F9FAFB;
+  --c-text:       #F9FAFB;
 
   /* Semánticos (Ajustados para accesibilidad en claro) */
   --c-danger:      #DC2626;
@@ -92,7 +92,7 @@
   --c-text:        #DDE8DD;
   --c-text-muted:  #7a7c92;
   --c-text-faint:  #3E523E;
-  --c-cream:       #F0EFE6;
+  --c-text:       #F0EFE6;
 
   /* Semánticos originales */
   --c-danger:      #FF5252;

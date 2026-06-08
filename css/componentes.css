@@ -73,7 +73,7 @@
 }
 
 .btn-ghost:hover {
-  color: var(--c-cream);
+  color: var(--c-text);
   background: var(--c-surface-2);
 }
 
@@ -505,7 +505,7 @@
   font-family: var(--font-display);
   font-size: 0.95rem;
   font-weight: 700;
-  color: var(--c-cream);
+  color: var(--c-text);
 }
 
 .carrito-item__precio-unit {
@@ -545,7 +545,7 @@
   font-size: 0.95rem;
   min-width: 28px;
   text-align: center;
-  color: var(--c-cream);
+  color: var(--c-text);
 }
 
 .carrito-item__total {
@@ -593,7 +593,7 @@
   font-family: var(--font-display);
   font-size: 1.1rem;
   font-weight: 700;
-  color: var(--c-cream);
+  color: var(--c-text);
   margin-bottom: var(--sp-3);
   padding-bottom: var(--sp-2);
   border-bottom: 1px solid var(--c-border);
@@ -646,7 +646,7 @@
   font-family: var(--font-display);
   font-size: 1rem;
   font-weight: 700;
-  color: var(--c-cream);
+  color: var(--c-text);
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -802,7 +802,7 @@
 }
 
 .pago-info-box i { color: var(--c-lime); flex-shrink: 0; margin-top: 2px; }
-.pago-info-box strong { color: var(--c-cream); }
+.pago-info-box strong { color: var(--c-text); }
 
 /* ── ESTADO DEL PEDIDO ── */
 .estado-pedido {
@@ -1049,7 +1049,7 @@
   font-family: var(--font-display);
   font-size: 0.85rem;
   font-weight: 700;
-  color: var(--c-cream);
+  color: var(--c-text);
 }
 
 .feature-item__desc {
