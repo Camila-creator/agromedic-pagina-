@@ -82,7 +82,7 @@
 }
 
 .herr-nav__link:hover {
-  color: var(--c-cream);
+  color: var(--c-text);
   background: var(--c-surface-2);
 }
 
