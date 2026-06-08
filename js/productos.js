@@ -26,21 +26,34 @@ function getProductoIdDeURL() {
   return new URLSearchParams(window.location.search).get('id') || null;
 }
 
-// ── FETCH PRODUCTO DESDE KONT API ─────────────────────────────
-// ✅ FIX BUG 4: usa el endpoint correcto /api/ecommerce/:slug/catalogo/:id
 async function fetchProducto(id) {
-  // Primero intentar con la API real si KontAPI está disponible
-  if (window.KontAPI && window.KONT && !window.KONT.DEMO_MODE) {
+  // 1. Validar el estado del entorno global
+  if (!window.KontAPI || !window.KONT) {
+    console.error('[Agromedic/productos] Dependencias críticas (KontAPI o KONT) no cargadas. Revise el orden de los scripts.');
+    return null; // Forzar error visible
+  }
+
+  // 2. Ejecutar la petición a la API
+  if (!window.KONT.DEMO_MODE) {
     try {
+      console.log(`[Agromedic/productos] Solicitando producto ID: ${id} al servidor...`);
       const data = await window.KontAPI.getProduct(id);
-      // El backend devuelve { ok: true, data: { ...producto } }
+      console.log(`[Agromedic/productos] Respuesta del servidor exitosa:`, data);
+      
+      // Retornar estructura estandarizada
       return data.data || data;
+
     } catch (err) {
-      console.warn(`[Agromedic/productos] API no disponible — modo demo. (${err.message})`);
+      // 3. NO usar el demo si el modo demo está apagado. Reportar el fallo real.
+      console.error(`[Agromedic/productos] FALLO CRÍTICO DE RED O SERVIDOR. Detalle:`, err);
+      // Opcional: mostrar un toast de error al usuario
+      mostrarToast('Error de conexión con el servidor. Por favor, recargue la página.', 'error');
+      return null; // Esto detonará la función renderError('El producto que buscas...') en el INIT
     }
   }
 
-  // Fallback al catálogo demo (buscar por id numérico o string)
+  // 4. Solo usar el catálogo demo si DEMO_MODE está explícitamente en TRUE
+  console.log('[Agromedic/productos] DEMO_MODE activado. Cargando datos locales.');
   const idStr = String(id);
   return CATALOGO_DEMO[idStr] || Object.values(CATALOGO_DEMO).find(p => String(p.id) === idStr) || null;
 }
