@@ -123,7 +123,7 @@
   font-family: var(--font-display);
   font-size: 1.1rem;
   font-weight: 700;
-  color: var(--c-cream);
+  color: var(--c-text);
   display: flex;
   align-items: center;
   gap: .5rem;
