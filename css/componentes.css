@@ -446,7 +446,7 @@
 .toast__texto {
   font-size: 0.875rem;
   font-weight: 500;
-  color: var(--c-cream);
+  color: var(--c-text);
   flex: 1;
 }
 
